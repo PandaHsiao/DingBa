@@ -1,0 +1,42 @@
+<div style="text-align: center;font-size: 24px;letter-spacing: 1px; line-height: 50px;margin-top: 40px;color: rgb(153,153,153);margin-bottom: 100px;">
+  Hi~ 您好 <br>
+  你現在是訂位者的身份<br>
+  <span style="color: red">如果你想建立餐廳，請輸入邀情碼</span><br>
+  確認無誤後，即可立即使用<br>
+  邀情碼：<input id="invite_code_txt" type="text" style="width:200px"><br>
+  <input id="turn_to_res" type="button" class="btn btn-primary" value="建立餐廳">
+</div>
+
+<script>
+
+  $("#turn_to_res").click(function(){
+      $("#turn_to_res").attr('disabled', 'disabled');
+
+      var invite_code = $("#invite_code_txt").val()
+
+      $.ajax({
+          url: "/home/turn_restaurant_with_invite",
+          type: 'POST',
+          data:  {invite_code: invite_code},
+          cache: false,
+          success: function(response){
+              $("#turn_to_res").removeAttr('disabled');
+
+              if (response.success) {
+                  alert(response.data)
+                  window.location.href = '/restaurant';
+              }
+              else if (response.error)
+                  alert(response.message)
+              else
+                  alert('發生未預期的回應，請告知CoDream小組處理!')
+          },
+          error: function(){
+              $("#turn_to_res").removeAttr('disabled');
+              alert('oops! 出現錯誤了!');
+          }
+      });
+
+
+  });
+</script>

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+      div {
+          position: relative;
+      }
+      a {
+          color: #0000FF;
+      }
+  </style>
+</head>
+<body>
+<!--<div style="display: block;margin-left: auto;margin-right: auto;width: 800px;border-radius: 15px;background-color:rgb(137,181,84);padding-top: 10px;padding-bottom: 5px;color:rgb(52,52,52) ">-->
+<div style="display: block;margin-left: auto;margin-right: auto;width: 800px;border-radius: 15px;padding-top: 10px;padding-bottom: 5px; ">
+  <div style="margin-left: 180px">
+    <%= image_tag "rae_logo_guest.png", :style => "width: 220px;" %>
+    <%= image_tag "slogan.png", :style => "width: 220px;" %>
+    <!--<img src="<%# "#{@domain_clear}" "assets/common/rae_logo_guest.png" %>" style="width: 220px">-->
+  </div>
+
+  <!--<div style="margin-left: 30px;margin-bottom: 20px;background-color: rgb(235,235,235);width: 710px;padding: 10px 20px 10px 10px;border-radius: 15px;">-->
+  <div style="margin-left: 30px;margin-bottom: 20px;width: 710px;padding: 10px 20px 10px 10px;border-radius: 15px;">
+    <div style="font-size: 16px;letter-spacing: 1px;margin-bottom: 5px;line-height: 26px;margin-left: 30px">
+      Hi, <%= @restaurant.name %><br>
+      <span style="margin-left: 2em">
+        顧客 <%= @booking.name %> 訂位已取消，詳細資料如以下：
+      </span>
+    </div>
+
+    <hr style="border: 1; width: 100%;color: rgb(55,55,55)">
+
+    <div style="margin: 5px 0 5px 30px;width: 680px;padding-top: 5px;letter-spacing: 0.5px">
+      <div style="float: left; font-size: 16px; width: 19%;line-height: 26px;text-align: right;">
+        餐廳：<br>
+        用餐日期：<br>
+        訂位人數：<br>
+        訂位者：<br>
+        訂位者電話：<br>
+        訂位者備註：<br>
+        訂位狀態：<br>
+      </div>
+
+      <div style="float: right; font-size: 16px; width: 81%; margin-bottom: 15px;line-height: 26px">
+        <span style="color: blue"><a href="<%= "#{@booking.res_url}" %>" target="_blank"><%= @booking.restaurant_name %></a></span><br>
+        <span style="color: red;letter-spacing: 0.5px"><%= @booking.booking_time.strftime("%Y/%m/%d %H:%M") %></span><br>
+        <%= @booking.num_of_people %><br>
+        <%= @booking.name %><br>
+        <%= @booking.phone %><br>
+        <%= @booking.remark %><br>
+        已取消<br>
+      </div>
+    </div>
+    <table style="width: 100%"></table>
+    <div style="margin-top: 10px; margin-left: 60px;font-size: 16px;line-height: 26px;letter-spacing: 0.5px;width: 400px">
+      如果您對此訊息有疑問，<br>
+      請麻煩撥電該消費者確認<br>
+      謝謝。
+    </div>
+
+    <div style="float: right;margin-right: 50px;letter-spacing: 1px;font-size: 16px;margin-bottom: 10px">
+      <a href="http://codream.tw" target="_blank">CoDream Team</a>
+    </div>
+
+    <hr style="border: 1; width: 100%;color: rgb(55,55,55)">
+
+    <div style="font-size: 16px;letter-spacing: 1px;text-align: center">
+      訂吧 Dingba 永遠免費<br>
+      由 CoDream 團隊提供<br>
+      <a href="https://www.facebook.com/dingba8" target="_blank">Dingba Facebook粉絲頁</a>、
+      <a href="http://blog.codream.tw/tagged/dingba" target="_blank">Dingba 部落格</a>
+      <!--、<a href="" target="_blank">Dingba Google+</a><br>-->
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>DingBa訂吧-免費網路餐廳訂位服務-Register</title>
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-47160661-1', 'codream.tw');
+      ga('send', 'pageview');
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= stylesheet_link_tag    'restaurant_manage', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'restaurant_manage', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
+  <script type="text/javascript" src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+  <!-- UserVoice JavaScript SDK (only needed once on a page) -->
+  <script>(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/sF5ldGsjGJoCOLJrdnsA.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})()</script>
+
+  <!-- A tab to launch the Classic Widget -->
+  <script>
+      UserVoice = window.UserVoice || [];
+      UserVoice.push(['showTab', 'classic_widget', {
+          mode: 'full',
+          primary_color: '#ad0741',
+          link_color: '#007dbf',
+          default_mode: 'support',
+          forum_id: 241700,
+          topic_id: 49849,
+          tab_label: '線上客服',
+          tab_color: '#910515',
+          tab_position: 'middle-left',
+          tab_inverted: false
+      }]);
+  </script>
+
+
+</head>
+<body>
+
+<div class="container">
+  <% if alert %>
+      <script type="text/javascript">alert("<%= alert %>");</script>
+  <% end %>
+  <div class="row" style="margin: 35px 0">
+    <%= yield %>
+  </div>
+</div>
+                s
+<%= render :partial => 'layouts/footer' %>
+
+
+
+</body>
+</html>

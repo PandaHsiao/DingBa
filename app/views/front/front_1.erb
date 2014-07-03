@@ -1,0 +1,162 @@
+<div id="main" class="container">
+  <div id="scroll">
+    <div id="booking" class="container">
+      <div class="row-fluid" id="res_info">
+        <div class="span5">
+          <div id="pics">
+            <!-- 這邊換成圖片 -->
+            <% 4.times do %>
+            <div></div>
+            <% end %>
+          </div>
+          <!-- 這邊是封面 id保留 -->
+          <div id="main_pic"></div>
+        </div>
+        <div class="span7">
+          <table>
+            <tr>
+              <td>餐廳名稱：</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>餐廳地址：</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>餐廳電話：</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>餐廳特色：</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>營業時間：</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>付款方式：</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>餐廳網址：</td>
+              <td>
+                <a href="padding_url" target="_blank">顯示文字</a>、
+                <a href="padding_url" target="_blank">顯示文字</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <form action="padding_url" id="booking_form">
+      <div class="row-fluid" id="booking_form_content">
+        <div class="span12" style="background-color: rgb(230,230,230)">
+          步驟一 => 步驟二
+        </div>
+        <div class="row-fluid">
+          <form action="padding_url">
+          <div class="span6">
+            <table>
+              <tr>
+                <td>用餐日期</td>
+                <td>
+                  <input type="text" name="" id="datepicker">
+                </td>
+              </tr>
+              <tr>
+                <td>用餐人數</td>
+                <td>
+                  <select name="">
+                    <option value=""></option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>用餐時段</td>
+                <td>
+                  <select name="">
+                    <option value=""></option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">用餐時間<input type="hidden" name="time" id="time"> <!-- 放置選擇時間的結果 --></td>
+              </tr>
+              <tr>
+                <td id="time_select" colspan="2">
+                  <input type="button" value="11:30" class="btn">
+                  <input type="button" value="11:45" class="btn">
+                  <input type="button" value="12:00" class="btn">
+                  <input type="button" value="12:15" class="btn">
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="span6">
+            <table>
+              <tr>
+                <td>訂位者大名：</td>
+                <td><input type="text" name=""></td>
+              </tr>
+              <tr>
+                <td>訂位者電話：</td>
+                <td><input type="text" name=""></td>
+              </tr>
+              <tr>
+                <td>訂位E-mail：</td>
+                <td><input type="text" name=""></td>
+              </tr>
+              <tr>
+                <td colspan="2"><textarea style="width: 100%" placeholder="留言給餐廳" name=""></textarea></td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <input type="submit" value="送出" class="btn btn-primary">
+                  <input type="reset" value="取消" class="btn">
+                </td>
+              </tr>
+            </table>
+          </div>
+          </form>
+        </div>
+      </div>
+      </form>
+    </div>
+
+    <div id="finish" class="container">
+      <h2>訂位成功</h2>
+      我們已收到您的訂位，會以E-mail方式提醒您。<br>
+      謝謝您使用訂吧提供的訂位服務。
+      <div class="base_orange">
+        <span style="font-size: 24px">前往步驟 2</span>
+        <span style="line-height: 24px; vertical-align: bottom;">通知好友訂位資訊</span>
+      </div>
+      <input type="button" value="前往通知" class="btn btn-primary" id="go_notice">
+      <input type="button" value="不用，謝謝" class="btn close_window">
+
+
+    </div>
+
+    <div id="to_friend" class="container">
+      <form action="padding_url" id="to_friend_form">
+        直接輸入E-mail, 並以”,”區分不同收件者
+        <input type="text" name="">
+        <input type="submit" value="通知好友" class="btn btn-primary">
+      </form>
+    </div>
+
+    <div id="thanks" class="container">
+<h3>您已成功通知好友訂位資訊！</h3>
+<h3>謝謝您使用 訂吧 提供的訂位服務。</h3>
+  if not login
+  註冊帳號可享維護訂位記錄、極速訂位等服務。
+  我要註冊 訂吧 帳號
+  end
+    </div>
+  </div>
+</div>
+
+<div id="lightbox">
+  <img class="content" src="/assets/booker/blog.jpg" alt="">
+</div>
+

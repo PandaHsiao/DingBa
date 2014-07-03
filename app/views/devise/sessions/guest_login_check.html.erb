@@ -1,0 +1,11 @@
+
+
+<div style="font-size: 18px;line-height: 30px;letter-spacing: 0.5px;text-align: center">
+您正在使用Guest帳號登入<br>
+若需享有快速訂位並有歷史訂位記錄，歡迎註冊訂吧會員！<br>
+</div>
+
+<div style="text-align: center;margin-top: 20px">
+<%= link_to "我要註冊", booker_new_path ,:class => 'btn btn-primary' %>
+<%= link_to "不用，謝謝", booking_restaurant_path(:id => @id, :is_check_login => @is_check_login, :booking_day => @booking_day) ,:class => 'btn btn-primary' %>
+</div>

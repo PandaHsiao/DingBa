@@ -1,0 +1,45 @@
+<!--<div id="res_header" class="row header">-->
+<!--<div class="span6">-->
+<!--<img id="logo" src="/assets/res/logo.png">-->
+<!--<span id="logo_word">訂位不打烊，你我都是VIP</span>-->
+<!--</div>-->
+<!--<div class="span6" id="link">-->
+<!--您的餐廳訂位網址&nbsp;<input type="text" value='res_url' readonly="readonly">-->
+<!--</div>-->
+<!--</div>-->
+
+<div id="res_header">
+  <div class = "span2">
+    <img src="/assets/booker/logo.png" alt="訂吧" id="logo">
+  </div>
+  <div class="span9">
+    <div class="row-fluid">
+      <div class="span6">
+        <div style="font-size: 50px;top: 57px;width: 300px;font-style:italic;">
+          24
+          <span style="font-size: 20px;margin-left: -10px;font-style:italic;">hr</span>
+          <span style="font-size: 20px;font-style:normal;letter-spacing: 1px;">餐廳網路訂位平台</span>
+        </div>
+
+        <div id="logo_word">
+          訂位不打烊，你我都是VIP
+          <span style="margin-left: 100px;font-size: 15px">
+            <% if @restaurant.id.blank? %>
+                <%= link_to "登入", booker_session_new_path %> |
+                <%= link_to "註冊", "/registrations/booker_new" %>
+            <% elsif !@restaurant.id.blank? %>
+                <span style="color: #000000">Hi,</span> <%= @restaurant.name %>
+                <span style="color: #000000">你好 </span>
+                <a href="/booker_manage/index" id="my_dingba" style="color: rgb(233,147,88)">| 我的訂吧 |</a>
+                <%= link_to "登出", destroy_user_session_path, method: :delete  %>
+            <% end %>
+          </span>
+        </div>
+        <% if !@restaurant.id.blank? %>
+            <a href="/restaurant#/calendar/restaurant_month"><img src="/assets/res/go_restaurant.png" alt="訂吧" style="margin-left: 600px"></a>
+        <% end %>
+      </div>
+    </div>
+    <img src="/assets/booker/line.png" id="line">
+  </div>
+</div>

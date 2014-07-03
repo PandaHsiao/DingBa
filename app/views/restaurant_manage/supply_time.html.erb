@@ -1,0 +1,146 @@
+
+<div style="margin-top:5px; margin-bottom: 20px; color: red;font-size: 17px;letter-spacing: 1px">設定提供訂位的時間，還可以控制訂位數量喔~</div>
+
+<form action="restaurant_manage/supply_condition_save" id="new_supply" method="post" data-value="<%= @supply_time.is_special %>">
+  <% if @supply_time.id != '' %>
+      <input name="condition[id]" type="hidden" value="<%= @supply_time.id %>">
+  <% end %>
+  <table class="table">
+    <colgroup>
+      <col style="width: 160px">
+      <col>
+    </colgroup>
+    <tr>
+      <td class="title"><i class="required">*</i>設立名稱</td>
+      <% if @supply_time.id != '' %>
+          <td><input type="text" name="condition[name]" value="<%= @supply_time.name %>" required="required" placeholder="ex:2014農曆春節"></td>
+      <% else %>
+          <td><input type="text" name="condition[name]" value="" required="required" placeholder="ex:2014農曆春節"></td>
+      <% end %>
+    </tr>
+
+    <% if @supply_time.is_special == 't' %>
+        <tr>
+          <td class="title"><i class="required">*</i>特定日</td>
+          <td>
+            <input type="text" data-type="date" name="condition[range_begin]" class="datepicker from input-small" required="required">&nbsp;
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <label class="checkbox inline"><input type="checkbox" name="condition[is_vacation]" value="t" <%= @supply_time.is_vacation == 't' ? 'checked="checked"' : '' %>>休假日</label>
+          </td>
+        </tr>
+
+    <% elsif @supply_time.is_special != 't' %>
+        <tr>
+          <td class="title"><i class="required">*</i>設立訂位有效期間</td>
+          <td>
+            <input type="text" data-type="date" name="condition[range_begin]" class="datepicker from input-small" required="required">&nbsp;
+            至&nbsp;
+            <input type="text" data-type="date" name="condition[range_end]" class="datepicker to input-small" required="required">
+          </td>
+        </tr>
+
+        <tr>
+          <td class="title"><i class="required">*</i>每周可提供訂位日</td>
+          <td>
+            <% week = @supply_time.available_week.split(',') %>
+            <label class="checkbox inline"><input type="checkbox" name="condition[week1]" value="1" <%= week.include?('1') ? 'checked="checked"' : '' %>>星期一</label>
+            <label class="checkbox inline"><input type="checkbox" name="condition[week2]" value="2" <%= week.include?('2') ? 'checked="checked"' : '' %>>星期二</label>
+            <label class="checkbox inline"><input type="checkbox" name="condition[week3]" value="3" <%= week.include?('3') ? 'checked="checked"' : '' %>>星期三</label>
+            <label class="checkbox inline"><input type="checkbox" name="condition[week4]" value="4" <%= week.include?('4') ? 'checked="checked"' : '' %>>星期四</label>
+            <label class="checkbox inline"><input type="checkbox" name="condition[week5]" value="5" <%= week.include?('5') ? 'checked="checked"' : '' %>>星期五</label>
+            <label class="checkbox inline"><input type="checkbox" name="condition[week6]" value="6" <%= week.include?('6') ? 'checked="checked"' : '' %>>星期六</label>
+            <label class="checkbox inline"><input type="checkbox" name="condition[week7]" value="0" <%= week.include?('0') ? 'checked="checked"' : '' %>>星期日</label>
+          </td>
+        </tr>
+    <% end %>
+  </table>
+
+  <%= render :partial => 'time_zones' %>
+  <div style="float: left;font-size: 18px;letter-spacing: 1px;" id="supply_explain">
+    <a href="/restaurant#/restaurant_manage/supply_condition" style="text-decoration: underline ; color: #cc0066">
+      <div style="color: #db301c;">*各供位數字的關係與解說範例</div>
+    </a>
+  </div>
+  <div class="float-r">
+    <input class="btn btn-primary" type="submit" value="<%= @is_edit %>">
+    <!--<input class="btn" type="reset" value="清除">-->
+  </div>
+</form>
+
+
+<script>
+
+    $("#supply_explain div").click(function(e) {
+        $.fancybox([
+            '/assets/common/supply_explain.jpg'
+        ],{
+            'type': 'image'
+        });
+    });
+
+
+    //===========================================================================
+    // view: supply_time
+    //===========================================================================
+
+    // $(function() {
+
+    $(".from").datepicker({
+        dateFormat: 'yy-mm-dd',
+        //defaultDate: "+1w",
+        changeMonth: true,
+        showOn: 'both',
+        buttonText: '<i class="icon-calendar"></i>',
+        onClose: function( selectedDate ) {
+            $(".to").datepicker( "option", "minDate", selectedDate );
+        }
+    }).val(getTodaysDate(0)); // For current date;
+
+    $(".to").datepicker({
+        dateFormat: 'yy-mm-dd',
+        //defaultDate: "+1w",
+        changeMonth: true,
+        showOn: 'both',
+        buttonText: '<i class="icon-calendar"></i>',
+        onClose: function( selectedDate ) {
+            $(".from").datepicker( "option", "maxDate", selectedDate );
+        }
+    }).val(getTodaysDate(1));
+
+    // $.datepicker.setDefaults($.datepicker.regional['zh-TW']);
+    // });
+
+    function getTodaysDate (val) {
+
+        if ('<%= @supply_time.range_begin %>' != '' && val == 0) {
+            var str = '<%= @supply_time.range_begin %>'
+            return str.substring(0, 10)
+        }
+
+        if ('<%= @supply_time.range_end %>' != '' && val == 1) {
+            var str = '<%= @supply_time.range_end %>'
+            return str.substring(0, 10)
+        }
+
+        if (val == 0){
+        var t = new Date;
+        var year = t.getFullYear();
+
+        var day = t.getDate()
+        if (day < 10) {
+            day = '0' + day;
+        }
+
+        var month = t.getMonth() + 1;
+        if ( month < 10){
+            month = '0' + month;
+        }
+
+        return (year + '-' + month + '-' + day);
+        }
+    }
+</script>

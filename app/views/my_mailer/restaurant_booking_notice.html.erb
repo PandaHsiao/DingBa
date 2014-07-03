@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+      div {
+          position: relative;
+      }
+      a {
+          color: #0000FF;
+      }
+  </style>
+</head>
+<body>
+
+<div style="display: block;margin-left: auto;margin-right: auto;width: 1000px;border-radius: 15px;padding-top: 10px;padding-bottom: 5px; ">
+  <div style="margin-left: 300px">
+    <%= image_tag "rae_logo_guest.png", :style => "width: 220px;" %>
+    <%= image_tag "slogan.png", :style => "width: 220px;" %>
+  </div>
+
+  <div style="margin-left: 30px;margin-bottom: 20px;width: 990px;padding: 10px 20px 10px 10px;border-radius: 15px;">
+    <div style="font-size: 16px;letter-spacing: 1px;margin-bottom: 5px;line-height: 26px;">
+      Hi, <%= @restaurant_name %><br>
+      <span style="margin-left: 2em">
+        有一筆新的訂位，詳細資料如以下：
+      </span>
+    </div>
+
+    <hr style="border: 1; width: 100%;color: rgb(55,55,55)">
+
+    <table style="width: 100%">
+      <colgroup>
+        <col style="width: 20%">
+        <col style="width: 5%">
+        <col style="width: 15%">
+        <col style="width: 15%">
+        <col style="width: 23%">
+        <col style="width: 22%">
+      </colgroup>
+
+      <tr>
+        <td style="text-align: center">日期</td>
+        <td style="text-align: center">人數</td>
+        <td style="text-align: center">訂位者姓名</td>
+        <td style="text-align: center">訂位者電話</td>
+        <td style="text-align: center">訂位者EMAIL</td>
+        <td style="text-align: center">備註</td>
+      </tr>
+
+      <tr>
+        <td class="table_content" style="text-align: center"><%= @booking.booking_time.strftime("%Y-%m-%d %H:%M") %></td>
+        <td class="table_content" style="text-align: right;padding-right: 10px"><%= @booking.num_of_people %></td>
+        <td class="table_content" style="text-align: center"><%= @booking.name %></td>
+        <td class="table_content" style="text-align: center"><%= @booking.phone %></td>
+        <td class="table_content" style="text-align: center"><%= @booking.email %></td>
+        <td class="table_content"><%= @booking.remark %></td>
+      </tr>
+    </table>
+
+    <hr style="border: 1; width: 100%;color: rgb(55,55,55)">
+
+    <div style="font-size: 16px;letter-spacing: 1px;text-align: center">
+      訂吧 Dingba 永遠免費<br>
+      由 CoDream 團隊提供<br>
+      <a href="https://www.facebook.com/dingba8" target="_blank">Dingba Facebook粉絲頁</a>、
+      <a href="http://blog.codream.tw/tagged/dingba" target="_blank">Dingba 部落格</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

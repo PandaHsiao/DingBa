@@ -1,0 +1,105 @@
+<%= render :partial => '/res_manage/res_header' %>
+<div class="row">
+  <div id="process" class="span12">
+    <span>步驟一 <span class="mark">&nbsp;編寫餐廳資訊&nbsp;</span></span>
+    =>
+    <span class="now">步驟二 <span class="mark">&nbsp;設定開放訂位時間&nbsp;</span></span>
+    =>
+    <span>步驟三 <span class="mark">&nbsp;專屬日曆產生&nbsp;</span></span>
+  </div>
+</div>
+
+<div id="main" class="row-fluid">
+  <div class="span3">
+    <div id="sidebar" class="span8">
+      <ul>
+        <li><a href="#">基本資料</a></li>
+        <li><a href="#" class="now">供位時間</a></li>
+        <li><a href="#">專屬日曆</a></li>
+        <li><a href="#">訂位明細(報表)</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="span9">
+    <div id="date_show"></div>
+    <input type="text" name="" id="datepicker">
+    <table class="table" id="daily_info">
+      <tr>
+        <th class="mark mark1"></th>
+        <th colspan="6">早餐</th>
+      </tr>
+      <tr>
+        <td>時間</td>
+        <td>人數</td>
+        <td>訂位人大名</td>
+        <td>訂位人電話</td>
+        <td>訂位人EMail</td>
+        <td>備註</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>08:00 AM</td>
+        <td>10</td>
+        <td>abc</td>
+        <td>0900123456</td>
+        <td>a@a.com</td>
+        <td>something</td>
+        <td><a href="#" class="btn">修改</a></td>
+      </tr>
+      <tr>
+        <% 7.times do %>
+        <td></td>
+        <% end %>
+      </tr>
+      <tr>
+        <th class="mark mark2"></th>
+        <th colspan="7">午餐</th>
+      </tr>
+      <tr>
+        <td>時間</td>
+        <td>人數</td>
+        <td>訂位人大名</td>
+        <td>訂位人電話</td>
+        <td>訂位人EMail</td>
+        <td>備註</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>08:00 AM</td>
+        <td>10</td>
+        <td>abc</td>
+        <td>0900123456</td>
+        <td>a@a.com</td>
+        <td>something</td>
+        <td><a href="#" class="btn">修改</a></td>
+      </tr>
+      <tr>
+        <td colspan="7"></td>
+      </tr>
+
+
+
+
+    </table>
+
+
+  </div>
+</div>
+
+
+<div id="lightbox_wrap">
+  <div id="lightbox">
+    <div id="tabs">
+      <ul>
+        <li><a href="#tabs-1">修改供位設定</a></li>
+        <li><a href="#tabs-2">訂位資料</a></li>
+      </ul>
+      <div id="tabs-1">
+        供位設定
+      </div>
+      <div id="tabs-2">
+        定位資料
+      </div>
+    </div>
+  </div>
+</div>

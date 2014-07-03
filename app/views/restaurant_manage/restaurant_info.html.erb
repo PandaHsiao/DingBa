@@ -1,0 +1,130 @@
+
+<div style="margin-top:5px; margin-bottom: 20px; color: red;font-size: 17px;letter-spacing: 1px">填寫餐廳資料，越詳細～才能讓訂位者更了解餐廳喔！</div>
+
+<%= form_for :restaurant ,:url => "restaurant_manage/restaurant_info_save" do |f| %>      <!-- @res, :url => res_mange_info_save_path-->
+    <%= f.hidden_field :id %>
+    <table class="table">
+      <colgroup>
+        <col style="width: 110px">
+        <col>
+      </colgroup>
+      <tr>
+        <td class="title"><i class="required">*</i>餐廳名稱</td>
+        <td><%= f.text_field :name, :required => true, :class => 'input-xlarge' %>
+        </td>
+      </tr>
+      <tr>
+        <td class="title"><i class="required">*</i>餐廳地址</td>
+        <td>
+
+          縣市&nbsp;
+          <%= f.select(:city,
+                       options_for_select([
+                                                  ['選擇縣市',''],
+                                                  ['新北市','新北市'],
+                                                  ['臺北市','臺北市'],
+                                                  ['臺中市','臺中市'],
+                                                  ['臺南市','臺南市'],
+                                                  ['高雄市','高雄市'],
+                                                  ['宜蘭縣','宜蘭縣'],
+                                                  ['桃園縣','桃園縣'],
+                                                  ['新竹縣','新竹縣'],
+                                                  ['苗栗縣','苗栗縣'],
+                                                  ['彰化縣','彰化縣'],
+                                                  ['南投縣','南投縣'],
+                                                  ['雲林縣','雲林縣'],
+                                                  ['嘉義縣','嘉義縣'],
+                                                  ['屏東縣','屏東縣'],
+                                                  ['臺東縣','臺東縣'],
+                                                  ['花蓮縣','花蓮縣'],
+                                                  ['澎湖縣','澎湖縣'],
+                                                  ['基隆市','基隆市'],
+                                                  ['新竹市','新竹市'],
+                                                  ['嘉義市','嘉義市'],
+                                                  ['金門縣','金門縣'],
+                                                  ['連江縣','連江縣']
+                                          ]), {}, {'data-value' => @restaurant.city, :style => 'width: 100px' }) %>
+          區域&nbsp;
+          <%= f.select(:area,
+                       options_for_select([['選擇區域','']]), {}, {:style => 'width: 100px', 'data-value' => @restaurant.area}) %>
+          <div style="margin: 5px"></div>
+          <%= f.text_field :address, {:required => true, :style => 'width: 445px'} %>
+        </td>
+      </tr>
+      <tr>
+        <td class="title">餐廳電話</td>
+        <td><%= f.phone_field :phone, :class => 'input-xlarge' %></td>
+      </tr>
+      <tr>
+        <td class="title">餐廳類別</td>
+        <td><%= f.select(:res_type,
+                         options_for_select(
+                                 [['請選擇','0'],['中式料理','1'],['日韓料理','2'],
+                                  ['歐美料理','3'],['東南亞料理','4'],['異國料理','5'],
+                                  ['甜點/下午茶','6'],['其他','7']
+                                 ]), {}, {'data-value' => @restaurant.res_type, :class => 'input-medium' }) %>
+        </td>
+      </tr>
+      <tr>
+        <td class="title">餐廳特色</td>
+        <td><%= f.text_area :feature, :style => 'width: 445px' %></td>
+      </tr>
+      <tr>
+        <td class="title"><i class="required">*</i>營業時間</td>
+        <td><%= f.text_area :business_hours, :required => true, :style => 'width: 445px' %></td>
+      </tr>
+      <tr>
+        <td class="title"><i class="required">*</i>價位範圍</td>
+        <td>
+          <%= f.text_field :price_from, {:required => true, :style => 'width: 50px;text-align:right'} %> 元
+          ~
+          <%= f.text_field :price_to, {:required => true, :style => 'width: 50px;text-align:right'} %> 元
+        </td>
+      </tr>
+      <tr>
+        <td class="title">付款方式</td>
+        <td>
+          <label class="checkbox inline"><input type="checkbox" value="1" name="restaurant[pay_type_cash]" <%= @pay_type.include?('1') ? 'checked' : '' %>>現金</label>
+          <label class="checkbox inline"><input type="checkbox" value="2" name="restaurant[pay_type_CreditCard]" <%= @pay_type.include?('2') ? 'checked' : '' %>>信用卡</label>
+          <label class="checkbox inline"><input type="checkbox" value="3" name="restaurant[pay_type_EasyCard]" <%= @pay_type.include?('3') ? 'checked' : '' %>>悠遊卡</label>
+        </td>
+      </tr>
+      <tr>
+        <td class="title"><i class="required">*</i>供位聯絡人</td>
+        <td><%= f.text_field :supply_person, :required => true, :class => 'input-xlarge' %></td>
+      </tr>
+      <tr>
+        <td class="title"><i class="required">*</i>供位E-mail</td>
+        <td><%= f.text_field :supply_email, :required => true, :style => 'width: 600px', :placeholder => '可輸入多組 E-mail, 以”,”區分' %></td>
+      </tr>
+      <tr>
+        <td class="title">網站1</td>
+        <td>
+          <%= f.text_field :info_url1, :class => 'input-medium',value: 'Facebook', placeholder:'ex: 餐廳 Facebook' %>
+          &nbsp&nbsp網址&nbsp<%= f.text_field :url1, :style => 'width: 300px' %>
+        </td>
+      </tr>
+      <tr>
+        <td class="title">網站2</td>
+        <td>
+          <%= f.text_field :info_url2, :class => 'input-medium',value: '部落格', placeholder:'ex: 餐廳 部落格' %>
+          &nbsp&nbsp網址&nbsp<%= f.text_field :url2, :style => 'width: 300px' %>
+        </td>
+      </tr>
+      <tr>
+        <td class="title">網站3</td>
+        <td>
+          <%= f.text_field :info_url3, :class => 'input-medium',value: '官網', placeholder:'ex: 餐廳 官網' %>
+          &nbsp&nbsp網址&nbsp<%= f.text_field :url3, :style => 'width: 300px' %>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <input class="btn btn-primary" type="submit" value="確定">
+          <input class="btn" type="reset" value="取消">
+        </td>
+      </tr>
+    </table>
+
+<% end %>

@@ -1,0 +1,53 @@
+
+<div id="invite_divx" style="width: 520px">
+
+  <div style="font-size: 20px;text-align: center;color: #7F1700;margin-bottom: 10px;line-height: 30px;letter-spacing: 1px">
+    請輸入以下資訊</br>
+    我們會盡速提供給您邀請碼
+  </div>
+
+  <%= form_tag(save_invite_person_path, :id => 'invite_div', :remote => true) do %>
+      <div style="float: left;width: 160px;font-size: 18px; line-height:40px;text-align: right;padding-right: 5px">
+        餐廳名稱：</br>
+        聯絡人：</br>
+        電話：</br>
+        E-Mail：</br>
+      </div>
+
+      <div style="float: left;width: 280px ;line-height:40px">
+        <%= text_field_tag :restaurant_name, params[:restaurant_name], :required => true, :style => 'padding-left:10px;font-size:16px;width: 250px' %>
+        <%= text_field_tag :user_name, params[:user_name], :required => true, :style => 'padding-left:10px;font-size:16px;width: 250px' %>
+        <%= text_field_tag :phone, params[:phone], :required => true, :style => 'padding-left:10px;font-size:16px;width: 250px' %>
+        <%= email_field_tag :email, params[:email], :required => true, :style => 'padding-left:10px;font-size:16px;width: 250px' %>
+      </div>
+
+      <div style="text-align: center">
+        <%= submit_tag "送出申請" , :class => 'btn btn-primary', :style => 'font-size:20px;width:120px',:disable_with => 'Processing' %>
+      </div>
+  <% end %>
+</div>
+
+<script>
+    $('#invite_div').submit(function(e){
+        e.preventDefault()
+
+        return alert("申請成功，24小時內未收到邀請碼，請來電詢問，謝謝");
+//        $.post(this.action, $(this).serialize()).done(function(response) {
+//            $.fancybox.close();
+//            if (response.success) {
+//                return alert("申請成功，我們會盡快給您邀請碼！");
+//            } else if (response.error) {
+//                return alert("" + response.message);
+//            } else {
+//                return alert('原因不明的失敗');
+//            }
+//        }).fail(function() {
+//            return alert('資料傳遞失敗');
+//        });
+    });
+</script>
+
+
+
+
+

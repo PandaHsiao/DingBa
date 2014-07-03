@@ -1,0 +1,132 @@
+
+<div class="span5">
+  <a href= "/">
+    <%= image_tag "common/rae_logo_guest.png", :size => "280", :style => 'display:block;margin:auto;margin-top:100px' %>
+    <%= image_tag "common/slogan.png", :size => "280", :style => 'display:block;margin:auto' %>
+  </a>
+  <a href="/sessions/restaurant_new" class="base_brown" style="display: block;font-size: 18px;text-align: center;text-decoration: underline;color:blue;letter-spacing: 1px;margin-top: 20px">餐廳用戶登入請點此</a>
+</div>
+
+<div class="span6" data-value="<%= @res_url %>">
+  <div style="font-size: 25px;letter-spacing: 1px; margin-top: 50px">登入我的訂吧</div>
+  <div style="font-size: 16px;color: #7F1700;letter-spacing: 2px;margin-top: 15px;margin-left: 3px;line-height: 26px">沒有帳號，我要
+    <a href="/registrations/booker_new" style="color: blue">註冊</a><br>
+    <a id="resend_confirm_email" href="#" class="base_brown" style="letter-spacing: 2px;">已經註冊，沒收到確認信?</a>
+  </div>
+
+
+  <hr color="#D6D6D6" size="3" width="100%">
+  <%= form_for(resource, :as => resource_name, :url => login_session_path(resource_name, :id => @id)) do |f| %>
+                                                       <!--session_path-->
+      <%= f.hidden_field :role, :value => '1' %>
+      <div style="float: left; font-size: 16px; width: 30%;line-height: 35px;text-align: right;">
+        帳號 ( E-Mail )：<br>
+        密碼：<br>
+        <a id="forget_password" href="#" class="base_brown" style="letter-spacing: 2px">忘記密碼?</a>
+      </div>
+
+      <div style="float: right; font-size: 16px; width: 67%; margin-bottom: 15px">
+        <%= f.email_field :email, :autofocus => true, :required => true %>
+        <%= f.password_field :password, :required => true %>
+
+        <% if devise_mapping.rememberable? -%>
+            <label class="checkbox" style="margin-top: 10px">
+              <%= f.check_box :remember_me %>
+              保持登入
+            </label>
+        <% end %>
+        <div>
+          <%= f.submit "登入" , { :class => 'btn btn-primary',:disable_with => 'Processing...' } %>
+          <% if @is_to_booking %>
+              <input type="button" value="Guest登入" id="guest_login_btn" class="btn btn-primary">
+              <%# link_to "Guest登入", booking_restaurant_path(:id => @id, :is_check_login => @is_check_login) ,:class => 'btn btn-primary' %>
+          <% end %>
+        </div>
+      </div>
+  <% end %>
+  <table width="100%">&nbsp;</table>
+
+  <hr color="#D6D6D6" size="3" width="100%">
+  <div style="font-size: 16px;border:#CCCCCC 2px solid;padding: 3px 3px 3px 3px; width: 210px;margin-left: 150px">
+    <img src="/assets/common/facebook.jpg">
+    <%= link_to "用 Facebook 帳號登入", user_omniauth_authorize_path(:facebook) %>
+  </div>
+
+  <div style="font-size: 16px;border:#CCCCCC 2px solid;padding: 3px 3px 3px 3px; width: 210px;margin-top: 10px;margin-left: 150px">
+    <img src="/assets/common/google.jpg">
+    <%= link_to "用 Google 帳號登入", user_omniauth_authorize_path(:google_oauth2) %>
+  </div>
+
+
+  <hr color="#D6D6D6" size="3" width="100%">
+  <div style="font-size: 14px;letter-spacing: 1px;line-height: 24px">
+    點擊「登入」或「其他社群帳號」登入的同時，<br>
+    表示您同意接受我們的個人資料提供同意書以及使用條款，<br>
+    也詳讀和完全了解我們的資料使用政策，<br>
+    包括Cookie的使用，詳細資訊及內容請參考
+    <a href="/home/clause" target="_blank" class="base_brown" style="margin-left: 2px">訂吧條款</a>
+  </div>
+</div>
+
+<input type="hidden" name="target" value="/dashboard"/>
+<script>
+    $('form').submit(function(){
+        return validate(this);
+    });
+
+    $('#guest_login_btn').click(function(){
+        var nzData = '/sessions/guest_login_check?id=<%= @id %>&is_check_login=<%= @is_check_login %>';    //'/users/password/new'
+
+        $.get(nzData, function(html) {
+            $.fancybox({
+                "content":html,
+                "width":400,
+                padding: 20,
+                helpers: {
+                    overlay: {
+                        locked: false
+                    },
+                    title: null
+                }
+            });
+        });
+
+    });
+
+    $('#forget_password').click(function(){
+        var nzData = '/password/set_new_password';    //'/users/password/new'
+
+        $.get(nzData, function(html) {
+            $.fancybox({
+                "content":html,
+                "width":400,
+                padding: 20,
+                helpers: {
+                    overlay: {
+                        locked: false
+                    },
+                    title: null
+                }
+            });
+        });
+    });
+
+    $('#resend_confirm_email').click(function(){
+        var nzData = '/confirmation/resend_confirm_email';
+
+        $.get(nzData, function(html) {
+            $.fancybox({
+                "content":html,
+                "width":400,
+                padding: 20,
+                helpers: {
+                    overlay: {
+                        locked: false
+                    },
+                    title: null
+                }
+            });
+        });
+    });
+</script>
+

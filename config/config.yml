@@ -1,0 +1,28 @@
+defaults: &defaults
+  app_title: DingBa (DEV ENV)
+  domain: "http://localhost:3000/r/"
+  domain_clear: "http://localhost:3000/"
+
+development:
+  <<: *defaults
+  app_title: DingBa (DEV ENV)
+  domain: "http://localhost:3000/r/"
+  domain_hack: "http://localhost:3000/h/"
+  domain_clear: "http://localhost:3000/"
+  error: "=============Catch Error:"
+  enable_invite_code: "true"
+  dingba_email: "a17877yun@gmail.com"
+
+test:
+  <<: *defaults
+  app_title: DingBa (TEST ENV)
+
+production:
+  <<: *defaults
+  app_title: DingBa
+  domain: "http://dingba.tw/r/"
+  domain_hack: "http://dingba.tw/h/"
+  domain_clear: "http://dingba.codream.tw/"
+  error: "=============Catch Error:"
+  enable_invite_code: "true"
+  dingba_email: "cs.dingba@codream.tw"

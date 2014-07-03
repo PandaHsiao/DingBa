@@ -1,0 +1,70 @@
+
+<div style="margin-left: -20px;font-size: 16px">
+  日訂位紀錄查詢：
+  <!--<input type="text" id="show_day" class="datepicker input-small" style="padding-right: 10px" value="<%# @select_date %>">-->
+  <input type="text" name="show_day" class="datepicker input-small" style="padding-right: 10px;font-size: 14px" value="<%= @select_date %>">
+</div>
+
+<div style="font-size: 16px; color: red; margin-top: 10px;margin-left: 12px">
+  查詢時間為：
+  <span style="color: blue; padding-left: 7px;font-size: 18px;"><%= @select_date %></span>
+</div>
+
+<% if @zones_books.length == 0 %>
+    <div style="font-size: 40px;width: 100%;text-align: center;color: red;margin-top: 40px;margin-bottom: 40px">目前無人訂位</div>
+<% end %>
+
+<% @zones_books.each do |z| %>
+    <table class="table table-bordered daily_info"  style="margin-left: -20px; width: 780px">
+      <colgroup>
+        <col style="width: 10%">
+        <col style="width: 6%">
+        <col style="width: 11%">
+        <col style="width: 16%">
+        <col style="width: 22%">
+        <col style="width: 25%">
+        <col style="width: 5%">
+        <col style="width: 5%">
+      </colgroup>
+      <tr>
+        <th colspan="8" style="font-size: 18px; letter-spacing: 2px; font-weight: 600;">
+          <div class="mark1"></div>
+          &nbsp;&nbsp;&nbsp;<%= z.name %></th>
+      </tr>
+      <tr>
+        <td class="table_header" >時間 </td>
+        <td class="table_header" >人數 </td>
+        <td class="table_header" >訂位者</br>姓名</td>
+        <td class="table_header" >訂位者</br>電話</td>
+        <td class="table_header" >訂位者E-Mail</td>
+        <td class="table_header" >訂位者備註</td>
+        <td class="table_header" >修改</td>
+        <td class="table_header" >取消</td>
+      </tr>
+
+      <% z.books.each do |b| %>
+          <% if b.status != '0' && b.status != '1'%>
+              <tr data-id="<%= b.id %>" style="text-decoration:line-through;">
+          <% else %>
+              <tr data-id="<%= b.id %>">
+          <% end %>
+          <td class="table_content" style="font-size: 14px"><%= b.booking_time.strftime('%H:%M') %></td>
+          <td class="table_content" style="text-align: right; padding-right: 10px"><%= b.num_of_people %></td>
+          <td class="table_content"><%= b.name %></td>
+          <td class="table_content"><%= b.phone %></td>
+          <td class="table_content" style="font-size: 11px"><a href="mailto:<%= b.email %>"><%= b.email %></a></td>
+          <td class="table_content"><%= b.remark %></td>
+          <td>
+            <% if b.status == '0' && b.booking_time > Time.now %>
+                <i class="icon-pencil modify" title="修改"></i>
+            <% end %>
+          </td>
+          <td>
+            <% if b.status == '0' && b.booking_time > Time.now %>
+                <i class="icon-remove-circle delete" title="取消訂位"></i>
+            <% end %>
+          </td>
+          </tr>
+      <% end %>
+    </table>
+<% end %>

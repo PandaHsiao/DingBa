@@ -1,0 +1,115 @@
+<%-# render :partial => 'restaurant_header' %>
+
+<%= render :partial => 'restaurant_step' %>
+
+<div id="main" class="row-fluid">
+
+  <%= render :partial => 'restaurant_left' %>
+
+  <div id="form_place" class="span9" style="width: 80%;">
+    <%= render :template => 'restaurant_manage/restaurant_info', :layout => false %>
+  </div>
+</div>
+
+<div id="lightbox_wrap">
+  <div id="lightbox">
+    <div id="tabs">
+      <ul>
+        <li><a href="#tabs-1">修改供位設定</a></li>
+        <li><a href="#tabs-2">訂位資料</a></li>
+      </ul>
+      <div id="tabs-1">
+        <form action="restaurant_manage/special_create" id="new_supply" method="post">
+          <div id="tab_time">
+          </div>
+          <div class="float-r" style="position: relative; bottom: 19px">
+            <span style="color: red;margin-right: 50px;font-size: 16px;letter-spacing: 0.5px">此修改會自動以日期命名存放在「供位時間」裡的「特殊日設定」</span>
+            <input class="btn" value="關閉" id="close_create_btn" style="width: 50px">
+          </div>
+        </form>
+      </div>
+      <div id="tabs-2">
+        <div id="tab_day_booking" style="margin-left: 20px">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+    //    $("#tabs").tabs({
+    //        activate: function(event, ui) {
+    //            alert("PRESSED TAB!");
+    //        }
+    //    });
+
+    tab_change()
+    function tab_change(tab_index) {
+        if(1 == tab_index){
+            $.ajax({
+                url: "restaurant_manage/day_booking",
+                type: "get",
+                data: {special_day:$("#tab_time [name='special_day']").val()},
+                success: function (data) {
+                    $("#tab_day_booking").html($.parseHTML(data));
+
+                    $("input[name='show_day']").datepicker({
+                        dateFormat: "yy-mm-dd",
+                        showOn: 'both',
+                        buttonText: '<i class="icon-calendar"></i>'
+                    });
+                    bind_event();
+                },
+                error: function(){
+                    alert('loading fail');
+                }
+            });
+        };
+    }
+
+    function bind_event(){
+        $("input[name='show_day']").live("click", function(){
+            $("input[name='show_day']").datepicker({
+                dateFormat: "yy-mm-dd",
+                showOn: 'both',
+                buttonText: '<i class="icon-calendar"></i>'
+            });
+        });
+
+        $("input[name='show_day']").live('change', function(){
+            $.ajax({
+                url: "/calendar/restaurant_day",
+                type: 'get',
+                data: {select_date: this.value},
+                cache: false,
+                success: function(response){
+                    $("#tab_day_booking").html($.parseHTML(response.attachmentPartial));
+
+                    $("input[name='show_day']").datepicker({
+                        dateFormat: "yy-mm-dd",
+                        showOn: 'both',
+                        buttonText: '<i class="icon-calendar"></i>'
+                    });
+                },
+                error: function(){
+                    alert('oops! 出現錯誤了!');
+                }
+            });
+        });
+    }
+
+    $("#tabs").on("tabsactivate", function(event, ui) {
+        //alert('pressed tab! ,solution 2')
+        tab_change(ui.newTab.index())
+    });
+
+    $("#close_create_btn").click(function(){
+        $("#lightbox_wrap").css('display','none');
+    });
+
+</script>
+
+
+
+

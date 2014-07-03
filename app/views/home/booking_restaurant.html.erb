@@ -1,0 +1,614 @@
+<style>
+    .grid {width:100%;}
+        /*.grid thead {margin:100px;}*/
+        /*.grid thead th{line-height:28px;height:28px;border-top:1px #D7D7D4 solid;border-bottom:1px #D7D7D4 solid; color:#666;}*/
+        /*.grid tbody tr{line-height:28px;height:30px;}*/
+        /*.grid tbody td{word-break:break-all;border-bottom:1px #d7d7d7 dotted;}*/
+        /*.grid tfoot tr{ line-height:30px; height:30; background-color:#fff;}*/
+        /*.grid tfoot td{ text-align:right; padding-right:5px;}*/
+        /**grid view 换色**/
+        /*.even{background-color:#FEF8F4;}*/
+        /*.over{background-color: #ffc;}*/
+
+        /*.text-overflow {*/
+        /*display:block;*/
+        /*width:31em;*/
+        /*word-break:keep-all;*/
+        /*white-space:nowrap;*/
+        /*overflow:hidden;*/
+        /*text-overflow:ellipsis;*/
+        /*}*/
+</style>
+
+<div id="main" class="container">
+  <div id="scroll">
+    <div id="booking" class="container">
+      <div class="row-fluid" id="res_info" style="height: 200px">
+        <div style="width: 38%">
+          <div id="pics">
+            <% if @restaurant.pic_name1 != nil %>
+                <div><img src="/res/<%= @restaurant.id %>/images/<%= @restaurant.pic_name1 %>"></div><% end %>
+            <% if @restaurant.pic_name2 != nil %>
+                <div><img src="/res/<%= @restaurant.id %>/images/<%= @restaurant.pic_name2 %>"></div><% end %>
+            <% if @restaurant.pic_name3 != nil %>
+                <div><img src="/res/<%= @restaurant.id %>/images/<%= @restaurant.pic_name3 %>"></div><% end %>
+            <% if @restaurant.pic_name4 != nil %>
+                <div><img src="/res/<%= @restaurant.id %>/images/<%= @restaurant.pic_name4 %>"></div><% end %>
+            <% if @restaurant.pic_name5 != nil %>
+                <div><img src="/res/<%= @restaurant.id %>/images/<%= @restaurant.pic_name5 %>"></div><% end %>
+          </div>
+          <div id="main_pic">
+            <% if @restaurant.front_cover == '1' %>
+                <img src="/res/<%= @restaurant.id %>/images/<%= @restaurant.pic_name1 %>">
+            <% elsif @restaurant.front_cover == '2' %>
+                <img src="/res/<%= @restaurant.id %>/images/<%= @restaurant.pic_name2 %>">
+            <% elsif @restaurant.front_cover == '3' %>
+                <img src="/res/<%= @restaurant.id %>/images/<%= @restaurant.pic_name3 %>">
+            <% elsif @restaurant.front_cover == '4' %>
+                <img src="/res/<%= @restaurant.id %>/images/<%= @restaurant.pic_name4 %>">
+            <% elsif @restaurant.front_cover == '5' %>
+                <img src="/res/<%= @restaurant.id %>/images/<%= @restaurant.pic_name5 %>">
+            <% end %>
+          </div>
+        </div>
+        <div style="width: 62%;float: right">
+          <!--<div style="width: 62%;margin-left: 400px">-->
+          <!--style="table-layout: fixed;width: 100%;"-->
+          <table class="grid">
+            <colgroup>
+              <col style="width: 90px">
+              <col style="width: 450px">
+            </colgroup>
+            <tr>
+              <td style="font-size: 16px;">餐廳名稱：</td>
+              <td><%= @restaurant.name %></td>
+            </tr>
+            <tr>
+              <td style="font-size: 16px">餐廳地址：</td>
+              <td><%= @address %></td>
+            </tr>
+            <tr>
+              <td style="font-size: 16px">餐廳電話：</td>
+              <td><%= @restaurant.phone %></td>
+            </tr>
+            <tr>
+              <td style="font-size: 16px">餐廳特色：</td>
+              <td ><%= @restaurant.feature %></td>
+            </tr>
+            <tr>
+              <td style="font-size: 16px">營業時間：</td>
+              <td ><%= @restaurant.business_hours %></td>
+            </tr>
+            <tr>
+              <td style="font-size: 16px">付款方式：</td>
+              <td>
+                <% if @pay_type.include?('1') %>
+                    現金
+                <% end %>
+
+                <% if @pay_type.include?('2') %>
+                    信用卡
+                <% end %>
+
+                <% if @pay_type.include?('3') %>
+                    悠遊卡
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <td style="font-size: 16px">餐廳網址：</td>
+              <td>
+                <% if !@restaurant.url1.blank? %><a href="<%= @restaurant.url1 %>" target="_blank"><%= @restaurant.info_url1 %></a><% end %>
+                <% if !@restaurant.url1.blank? && !@restaurant.url2.blank? %>、<% end %>
+                <% if !@restaurant.url2.blank? %><a href="<%= @restaurant.url2 %>" target="_blank"><%= @restaurant.info_url2 %></a><% end %>
+                <% if !@restaurant.url2.blank? && !@restaurant.url3.blank? %>、<% end %>
+                <% if !@restaurant.url3.blank? %><a href="<%= @restaurant.url3 %>" target="_blank"><%= @restaurant.info_url3 %></a><% end %>
+              </td>
+            </tr>
+          </table>
+
+          <!--<hr color="#lelele" size="3" width="100%" style="margin-top:25px">-->
+        </div>
+      </div>
+      <table style="width: 100%"></table>
+      <div class="row-fluid" id="booking_form_content" style="border-color: rgb(230,230,230); border-width: 3px;">
+        <div class="span12" style="background-color: rgb(230,230,230); height: 50px;letter-spacing: 1px">
+          <div style="margin-top: 15px;margin-left: 40px;font-size: 25px;float: left; color: rgb(231, 56, 32);width: 250px">步驟一
+            <span style="margin-left: 8px;font-size: 20px;border: 1px rgb(231, 56, 32) solid;background-color: #ffffff;padding: 5px 5px 5px 5px;text-align: center">填寫訂位資料</span>
+          </div>
+          <div style="margin-top: 13px;font-size: 35px;float: left;font-size: 50px;;width:70px">→</div>
+          <div style="margin-top: 15px;font-size: 25px;float: left; color: #1e1e1e">步驟二
+            <span style="margin-left: 8px;font-size: 20px;border: 1px #1e1e1e solid;background-color: #ffffff;padding: 5px 5px 5px 5px;text-align: center">通知好友訂位資訊</span>
+          </div>
+        </div>
+        <!--<div class="span12" style="font-size: 25px;float: left; color: #876139; margin-left: 345px">-->
+        <!--填寫訂位資料-->
+        <!--</div>-->
+        <div class="row-fluid">
+
+          <form action="home/save_booking" id="booking_form" method="post">
+            <div style="float: left; width: 3%">&nbsp</div>
+            <div id="get_info" style="float: left; width: 43%">
+              <%= render :partial => 'booking_zone', :locals => {:booking_condition => @booking_condition}  %>
+            </div>
+            <div style="float: left; width: 54%">
+              <table>
+                <tr>
+                  <td style="width:24%; padding-left: 10px; font-size: 16px">訂位者大名：</td>
+                  <td><input type="text" id="b_name" name="booker_name" style="width:262px; text-align: left; font-size: 16px; padding-left: 5px" value="<%= @booker.name %>"></td>
+                </tr>
+                <tr>
+                  <td style="padding-left: 10px;font-size: 16px">訂位者電話：</td>
+                  <td><input type="text" id="b_phone" name="booker_phone" style="width:262px; text-align: left; font-size: 16px; padding-left: 5px" value="<%= @booker.phone %>"></td>
+                </tr>
+                <tr>
+                  <td style="padding-left: 10px;font-size: 16px">訂位 E-Mail：</td>
+                  <td><input type="text" id="b_email" name="booker_email" style="width:262px; text-align: left; font-size: 16px; padding-left: 5px" value="<%= @booker.email %>"></td>
+                </tr>
+                <tr>
+                  <td colspan="2"><textarea style="width: 76%; height:60px" placeholder="  留言給餐廳" name="remark"></textarea></td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <input type="button" value="訂位" class="btn btn-primary" id="booking_save_btn">
+                    <div id="wait_div" style="display: none;font-size: 20px;letter-spacing: 0.5px;color: red">訂位處理中... 請勿離開此畫面!!</div>
+                    <!--<input type="reset" value="取消" class="btn">-->
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="finish" class="container">
+      <h2>訂位成功</h2>
+      我們已收到您的訂位，會以E-mail方式提醒您。<br>
+      謝謝您使用訂吧提供的訂位服務。
+      <div class="base_orange">
+        <span style="font-size: 24px">前往步驟 2</span>
+        <span style="line-height: 24px; vertical-align: bottom;">通知好友訂位資訊</span>
+      </div>
+      <input type="button" value="前往通知" class="btn btn-primary" id="go_notice">
+      <input type="button" value="不用，謝謝" class="btn close_window">
+    </div>
+
+    <div id="to_friend" class="container">
+      <form action="padding_url" id="to_friend_form">
+        直接輸入E-mail, 並以”,”區分不同收件者
+        <input type="text" name="">
+        <input type="submit" value="通知好友" class="btn btn-primary">
+      </form>
+    </div>
+
+    <div id="thanks" class="container">
+      <h3>您已成功通知好友訂位資訊！</h3>
+      <h3>謝謝您使用 訂吧 提供的訂位服務。</h3>
+      if not login
+      註冊帳號可享維護訂位記錄、極速訂位等服務。
+      我要註冊 訂吧 帳號
+      end
+    </div>
+  </div>
+</div>
+
+<div id="lightbox">
+  <img class="content" src="/assets/common/blog.jpg" alt="">
+</div>
+
+<div id="bookingModal" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="height:auto">
+  <input id="booking_id_hidden" type="hidden" value="">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" name="close_bookingModal">×</button>
+    <h4>訂位成功</h4>
+  </div>
+  <div class="modal-body" style="font-size: 16px">
+    我們已經收到你的訂位，<div id="has_mail_div" style="font-size: 16px">並且已經發送E-Mail 提醒您。</div>謝謝你使用DingBa提供的訂位服務。
+    <hr id="step_2_hr" color="#D6D6D6" size="3" width="100%">
+    <div id="step_2" class="base_orange">
+      <span style="font-size: 24px">步驟 2</span>
+      <span style="line-height: 24px; vertical-align: bottom;">通知好友訂位資訊</span>
+    </div>
+    <textarea id="notice_emails" placeholder="直接輸入E-mail, 並以”,”區分不同收件者"></textarea>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" id="noticeFriend">通知好友</button>
+    <button class="btn" data-dismiss="modal" aria-hidden="true" name='close_bookingModal'>關閉</button>
+  </div>
+</div>
+
+
+<script>
+
+    //  $('.more_td').click(function(){
+    //      alert('')
+    //     $(this).attr('overflow','visible');
+    //  });
+
+    $(".grid tr").mouseover(function(){
+        //$(this).addClass("over");
+        $(this).find('td').eq(1).removeClass("text-overflow");
+    }).mouseout(function(){
+                //$(this).removeClass("over");
+                $(this).find('td').eq(1).addClass("text-overflow");
+            });
+    //$(".grid tr:even").addClass("even");
+
+
+    $('#pics div').mouseover(function(){
+
+        $(this).find("img").each(function(){
+            //$('#lightbox').show().children().attr('src',$(this).attr('src'))
+            var scr = $(this).attr('src');
+            $('#main_pic').find("img").each(function(){
+                $(this).attr('src',scr)
+            });
+        });
+    });
+
+    $('#main_pic').click(function(){
+
+        $('#lightbox').show().children().attr('src', $('#main_pic img').attr('src'))
+    });
+
+</script>
+
+<script>
+    $('[name=bookingModal]').click(function(){
+        $('#bookingModal').show();
+    });
+
+    $('[name=close_bookingModal]').click(function(){
+        $('#bookingModal').hide();
+        window.location.href = '/booker_manage/index';
+    });
+
+    $('#noticeFriend').click(function(){
+        var notice_emails = $('#notice_emails').val()
+        var booking_id = $('#booking_id_hidden').val()
+
+        $.ajax({
+            url: "/home/notice_friend",
+            type: 'POST',
+            data:  {booking_id: booking_id, notice_emails: notice_emails},
+            cache: false,
+            async: false,
+            success: function(response){
+                $('#bookingModal').hide();
+
+                if (response.success)
+                    alert(response.data)
+                else if (response.error)
+                    alert(response.message)
+                else
+                    alert('發生未預期的回應，請告知CoDream小組處理!')
+
+                window.location.href = '/booker_manage/index';
+            },
+            error: function(){
+                $('#bookingModal').hide();
+                alert('oops! 出現錯誤了!');
+
+                window.location.href = '/booker_manage/index';
+            }
+        });
+    });
+</script>
+
+<script type='text/javascript'>
+    $("#booking_date").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true
+    }) //.val(getTodaysDate(1)); // For current date;
+
+    function getTodaysDate (add_day) {
+        var t = new Date;
+        var year = t.getFullYear();
+        var day = t.getDate()
+        if (day < 10) {day = '0' + day;}
+
+        var month = t.getMonth() + 1;
+        if ( month < 10){month = '0' + month;}
+
+        return (year + '-' + month + '-' + day);
+    }
+
+    $(window).ready(function(){
+        bind_event();
+    });
+
+    function bind_event(){
+        $("#booking_date").live("click", function(){
+            $("#booking_date").datepicker({
+                dateFormat: 'yy-mm-dd',
+                changeMonth: true,
+                showOn:'focus'
+            }).focus();
+        });
+
+        $('#booking_date').live('change', function(){
+            $.ajax({
+                url: "/home/get_condition",
+                type: 'get',
+                data: {booking_day: this.value, id: location.href.split('/').pop()},
+                cache: false,
+                async: false,
+                success: function(response){
+                    if (response.success) {
+                        $('#get_info').html($.parseHTML(response.attachmentPartial))
+
+                        var num_of_people = '1'
+                        $('#select_people').val(num_of_people)
+                        set_default_ori_inverse();
+                        set_time_button($('#select_zone').val(), false);
+                    }
+                    else if (response.error)
+                        alert(response.message)
+                    else
+                        alert('發生未預期的回應，請告知CoDream小組處理!')
+                },
+                error: function(){
+                    alert('oops! 出現錯誤了!');
+                }
+            });
+        });
+
+        $('#select_people').live('change', function(){
+            var zone_value = $('#select_zone').val()
+
+            if (zone_value == 0) {
+                check_gray('time_select1')
+            }
+            else if (zone_value == 1) {
+                check_gray('time_select2')
+            }
+            else if (zone_value == 2) {
+                check_gray('time_select3')
+            }
+            else if (zone_value == 3) {
+                check_gray('time_select4')
+            }
+            else if (zone_value == 4) {
+                check_gray('time_select5')
+            }
+            else if (zone_value == 5) {
+                check_gray('time_select6')
+            }
+
+        });
+
+        $('#select_zone').live('change', function(){
+            var zone_value = $(this).val();
+            set_time_button(zone_value, true);
+        });
+    }
+
+    $(function(){
+        var num_of_people = '1'
+        $('#select_people').val(num_of_people)
+        set_default_ori_inverse();
+        set_time_button($('#select_zone').val(), false)
+    });
+
+    $('#booking_save_btn').click(function(e){
+        //$("#booking_save_btn").attr('disabled', 'disabled');
+        e.preventDefault()
+        $("#booking_save_btn").hide();
+        $("#wait_div").show();
+
+        var booker_data = $("#booking_form").serializeArray();
+        var booking = {};
+
+        for(item in booker_data){
+            booking[booker_data[item]['name']] = $.trim(booker_data[item]['value'])
+        }
+
+        var no_select = true
+        $(".btn.checked").each(function(){
+            no_select = false
+            booking['booking_time'] = $("#booking_date").val() + " " + $(this).val() ;
+            booking['time_zone_id'] = $(".btn.checked").data('value')
+        });
+
+        if (no_select) {
+            alert("訂位時間還沒有選擇喔~!")
+            //$("#booking_save_btn").removeAttr('disabled');
+            $("#booking_save_btn").show();
+            $("#wait_div").hide();
+            return false
+        }
+
+        if ($.trim($('#b_name').val()) == ''){
+            alert("訂位者姓名不能為空喔!")
+            //$("#booking_save_btn").removeAttr('disabled');
+            $("#booking_save_btn").show();
+            $("#wait_div").hide();
+            return false
+        }
+
+        if ($.trim($('#b_phone').val()) == ''){
+            alert("訂位者電話不能為空喔!")
+            //$("#booking_save_btn").removeAttr('disabled');
+            $("#booking_save_btn").show();
+            $("#wait_div").hide();
+            return false
+        }
+
+        $.ajax({
+            url: "/home/save_booking",
+            type: 'POST',
+            data:  {booking: $.parseJSON(JSON.stringify(booking))},
+            cache: false,
+            //async: false,
+            success: function(response){
+                if (response.success){
+                    $('#booking_id_hidden').val(response.booking_id);
+
+                    if (response.booking_notice_type == 'one'){
+                        $('#noticeFriend').hide();
+                        $('#notice_emails').hide();
+                        $('#step_2_hr').hide();
+                        $('#step_2').hide();
+                    }
+
+                    if (response.has_mail == false){
+                        $('#has_mail_div').hide();
+                    }
+                    $('#bookingModal').show();
+                }
+                else if (response.error)
+                    alert(response.message)
+                else
+                    alert('發生未預期的回應，請告知CoDream小組處理!')
+
+                //$("#booking_save_btn").removeAttr('disabled');
+                $("#booking_save_btn").show();
+                $("#wait_div").hide();
+            },
+            error: function(){
+                alert('oops! 出現錯誤了!');
+                //$("#booking_save_btn").removeAttr('disabled');
+                $("#booking_save_btn").show();
+                $("#wait_div").hide();
+            }
+        });
+    });
+
+
+    function check_gray(zone){
+        if ((parseInt($('#select_people').val()) + parseInt($('#now_total_people').val())) > parseInt($('#now_total_allow').val())) {
+            $("#" + zone + " input[type='button']").removeClass('checked').addClass('btn-inverse')
+        }
+        else if ( parseInt($('#select_people').val()) > parseInt($('#now_each_allow').val())) {
+            $("#" + zone + " input[type='button']").removeClass('checked').addClass('btn-inverse')
+        }
+        else {
+            $("#" + zone + " input[type='button']").removeClass('btn-inverse')
+
+            $("#" + zone + " input[type='button']").each(function(){
+                if ($(this).hasClass('ori_inverse')){
+                    $(this).addClass('btn-inverse')
+                }
+                else if ((parseInt($('#select_people').val()) + parseInt($(this).data('bcount'))) > parseInt($('#now_fifteen_allow').val()) ){
+                    $(this).removeClass('checked').addClass('btn-inverse')
+                }
+            });
+        }
+    };
+
+    function set_default_ori_inverse(){
+        $("#time_select1 input[type='button']").each(function(){
+            if ($(this).hasClass('btn btn-inverse')){
+                $(this).addClass('ori_inverse')
+            }
+        });
+        $("#time_select2 input[type='button']").each(function(){
+            if ($(this).hasClass('btn btn-inverse')){
+                $(this).addClass('ori_inverse')
+            }
+        });
+        $("#time_select3 input[type='button']").each(function(){
+            if ($(this).hasClass('btn btn-inverse')){
+                $(this).addClass('ori_inverse')
+            }
+        });
+        $("#time_select4 input[type='button']").each(function(){
+            if ($(this).hasClass('btn btn-inverse')){
+                $(this).addClass('ori_inverse')
+            }
+        });
+        $("#time_select5 input[type='button']").each(function(){
+            if ($(this).hasClass('btn btn-inverse')){
+                $(this).addClass('ori_inverse')
+            }
+        });
+        $("#time_select6 input[type='button']").each(function(){
+            if ($(this).hasClass('btn btn-inverse')){
+                $(this).addClass('ori_inverse')
+            }
+        });
+    }
+
+    function set_time_button(zone_value, check){
+
+        $('.t_select .btn').removeClass('checked')
+        $('.t_select:visible').hide();
+
+        if (zone_value == 0) {
+            $('#now_fifteen_allow').val($('#z1_fifteen_allow').val())
+            $('#now_total_allow').val($('#z1_total_allow').val())
+            $('#now_total_people').val($('#z1_total_people').val())
+            $('#now_each_allow').val($('#z1_each_allow').val())
+
+            if (check){
+                check_gray('time_select1')
+            }
+
+            $('#time_select1').show();
+        }
+        else if (zone_value == 1) {
+            $('#now_fifteen_allow').val($('#z2_fifteen_allow').val())
+            $('#now_total_allow').val($('#z2_total_allow').val())
+            $('#now_total_people').val($('#z2_total_people').val())
+            $('#now_each_allow').val($('#z2_each_allow').val())
+
+            if (check){
+                check_gray('time_select2')
+            }
+
+            $('#time_select2').show();
+        }
+        else if (zone_value == 2) {
+            $('#now_fifteen_allow').val($('#z3_fifteen_allow').val())
+            $('#now_total_allow').val($('#z3_total_allow').val())
+            $('#now_total_people').val($('#z3_total_people').val())
+            $('#now_each_allow').val($('#z3_each_allow').val())
+
+            if (check){
+                check_gray('time_select3')
+            }
+
+            $('#time_select3').show();
+        }
+        else if (zone_value == 3) {
+            $('#now_fifteen_allow').val($('#z4_fifteen_allow').val())
+            $('#now_total_allow').val($('#z4_total_allow').val())
+            $('#now_total_people').val($('#z4_total_people').val())
+            $('#now_each_allow').val($('#z4_each_allow').val())
+
+            if (check){
+                check_gray('time_select4')
+            }
+
+            $('#time_select4').show();
+        }
+        else if (zone_value == 4) {
+            $('#now_fifteen_allow').val($('#z5_fifteen_allow').val())
+            $('#now_total_allow').val($('#z5_total_allow').val())
+            $('#now_total_people').val($('#z5_total_people').val())
+            $('#now_each_allow').val($('#z5_each_allow').val())
+
+            if (check){
+                check_gray('time_select5')
+            }
+
+            $('#time_select5').show();
+        }
+        else if (zone_value == 5) {
+            $('#now_fifteen_allow').val($('#z6_fifteen_allow').val())
+            $('#now_total_allow').val($('#z6_total_allow').val())
+            $('#now_total_people').val($('#z6_total_people').val())
+            $('#now_each_allow').val($('#z6_each_allow').val())
+
+            if (check){
+                check_gray('time_select6')
+            }
+
+            $('#time_select6').show();
+        }
+    };
+
+
+</script>
+

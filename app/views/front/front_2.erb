@@ -1,0 +1,99 @@
+<div id="main" class="container">
+  <div id="booking" class="container">
+    <div class="row-fluid" id="res_info">
+      <div class="span5">
+        <div id="pics">
+          <!-- 這邊換成圖片 -->
+          <% 4.times do %>
+          <div></div>
+          <% end %>
+        </div>
+        <!-- 這邊是封面 id保留 -->
+        <div id="main_pic"></div>
+      </div>
+      <div class="span7">
+        <table>
+          <tr>
+            <td>餐廳名稱：</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>餐廳地址：</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>餐廳電話：</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>餐廳特色：</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>營業時間：</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>付款方式：</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>餐廳網址：</td>
+            <td>
+              <a href="padding_url" target="_blank">顯示文字</a>、
+              <a href="padding_url" target="_blank">顯示文字</a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="span6">
+        <table>
+          <tr>
+            <td>用餐日期：</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>用餐人數：</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>用餐時段：</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>用餐時間：</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>訂位者大名：</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>訂位者電話：</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>訂位E-mail：</td>
+            <td></td>
+          </tr>
+        </table>
+      </div>
+      <div class="span6">
+        備註：<br>
+        <%= @comment %><br>
+        <span class="base_orange">訂位取消原因：</span>
+        <form action="">
+          <label class="radio"><input type="radio" name="">同伴無法配合</label>
+          <label class="radio"><input type="radio" name="">選擇了其他餐廳</label>
+          <label class="radio"><input type="radio" name="">聚餐延期</label>
+          <label class="radio"><input type="radio" name="">其他，因為： </label><input type="text" name="">
+          <input type="submit" value="確認取消定位" class="btn btn-primary">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

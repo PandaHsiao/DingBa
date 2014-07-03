@@ -1,0 +1,48 @@
+
+<div style="margin-top:5px; margin-bottom: 20px; color: red;font-size: 17px;letter-spacing: 1px">上傳圖片，讓訂位者看到漂亮的餐廳裝潢與菜單吧～</div>
+
+<div id="pics">
+  <% (1..5).each do |i| %>
+      <div class="float" data-id="<%= i %>">
+        <label class="radio" style="font-size: 15px; letter-spacing: 1px"><input type="radio" name="radio_img" <%= @restaurant.front_cover == i.to_s ? 'checked="checked"' : '' %>>設成封面</label>
+        <div class="placeholder  <%= @restaurant.front_cover == i.to_s ? 'cover' : '' %>">
+          <% if pic_name = @restaurant.method("pic_name#{i}".to_sym).call %>
+              <img src="/res/<%= @restaurant.id %>/images/<%= pic_name %>">
+          <% end %>
+        </div>
+        <% if pic_name %>
+            <i class="icon-remove"></i>
+        <% end %>
+      </div>
+  <% end %>
+  <div class="clear"></div>
+</div>
+<a href="#" id="upload" class="not_ajax btn btn-primary">選擇檔案上傳</a>
+
+<input type="button" value="下一步" class="btn btn-primary" id="next_step">
+
+<div style="margin: 10px 0; font-size: 15px;letter-spacing: 0.5px">
+  上傳小秘訣：<br>
+  1. 你可以用滑鼠一次圈選你電腦中的多張圖片同時上傳<br>
+  2. 按住ctrl鍵不放，可以用滑鼠點選多張圖片<br>
+  <!--3. 圖片尺寸為寬200像素，高180像素<br>-->
+  3. 圖片最大不可以超過 3M
+</div>                      <hr>
+
+
+<a href="/restaurant_manage/home_image"   class="not_ajax btn btn-primary">產生首頁圖片</a>
+如果貴餐廳被選為首頁曝光的餐廳時，方須產生首頁圖片!
+
+<% if !@restaurant.home_img.blank?%>
+    <br>   現在使用中的 Dingba 首頁圖片 :                        <br>
+<img src="/res/home/images/<%= @restaurant.home_img%>"   >
+<% end %>
+
+
+<script>
+  $('#next_step').click(function(){
+      window.location.href = '/restaurant#/restaurant_manage/supply_condition'
+      window.location.reload();
+  });
+
+</script>

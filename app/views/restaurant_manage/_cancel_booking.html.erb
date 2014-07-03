@@ -1,0 +1,43 @@
+<tr class="form delete">
+  <td colspan="8">
+    <div id="wrapper">
+      <%= form_for :booking ,:url => "/restaurant_manage/cancel_booking_save", :html => {:id => 'cancel_booking'} do |f| %>
+          <%= f.hidden_field :id %>
+          <div class="info">訂位取消</div>
+          <table class="table">
+            <tr>
+              <td><%= f.radio_button :status, "2", checked: @booking.status == '2' %> 同伴無法配合</td>
+              <td><%= f.radio_button :status, "3", checked: @booking.status == '3' %> 餐廳當天座位不夠</td>
+            </tr>
+            <tr>
+              <td><%= f.radio_button :status, "4", checked: @booking.status == '4' %> 選擇了其他餐廳</td>
+              <td><%= f.radio_button :status, "5", checked: @booking.status == '5' %> 餐廳臨時公休</td>
+            </tr>
+            <tr>
+              <td><%= f.radio_button :status, "6", checked: @booking.status == '6' %> 聚餐延期</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <% if @booking.status == '0' %>
+                    <%= f.radio_button :status, "7", checked: true %> 其他
+                <% else %>
+                    <%= f.radio_button :status, "7", checked: @booking.status == '7' %> 其他
+                <% end %>
+
+                <%= f.text_field :cancel_note, :placeholder => '請輸入' %>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <% if @booking.booking_time > Time.now && @booking.status == '0' %>
+                    <input type="submit" value="訂位取消" class="btn btn-primary">
+                <% end %>
+              </td>
+            </tr>
+          </table>
+      <% end %>
+    </div>
+  </td>
+</tr>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>DingBa訂吧-免費網路餐廳訂位服務</title>
+  <script src="/Jcrop/js/jquery.min.js"></script>
+  <script src="/Jcrop/js/jquery.Jcrop.js"></script>
+  <link rel="stylesheet" href="/Jcrop/css/jquery.Jcrop.css" type="text/css" />
+
+
+  <script language="Javascript">
+      (function($) {
+
+          $(function(){
+
+              var jcrop_api;
+              var bounds, boundx, boundy;
+
+              $('#cropbox').Jcrop({
+                  onChange: showPreview,
+                  onSelect: showPreview,
+                  aspectRatio: <%=(285.0/175.0).to_f%>
+              },function(){
+                  jcrop_api = this;
+                  bounds = jcrop_api.getBounds();
+                  boundx = bounds[0];
+                  boundy = bounds[1];
+              });
+
+              function showPreview(coords)
+              {
+                  if (parseInt(coords.w) > 0)
+                  {
+                      var rx = 285 / coords.w;
+                      var ry = 175 / coords.h;
+
+                      $('#preview').css({
+                          width: Math.round(rx * boundx) + 'px',
+                          height: Math.round(ry * boundy) + 'px',
+                          marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+                          marginTop: '-' + Math.round(ry * coords.y) + 'px'
+                      });
+
+                      var ratio =   1
+                      $("#crop_x").val(Math.round(coords.x * ratio));
+                      $("#crop_y").val(Math.round(coords.y * ratio));
+                      $("#crop_w").val(Math.round(coords.w * ratio));
+                      $("#crop_h").val(Math.round(coords.h * ratio));
+
+
+                  }
+              };
+
+          });
+
+      }(jQuery));
+  </script>
+</head>
+<body>
+
+
+<%= form_tag "/restaurant_manage/image_process" do %>
+    <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
+        <%= hidden_field_tag attribute, :id => attribute %>
+    <% end %>
+    <%= submit_tag "開始截圖" %>
+
+    <span>
+      <img src="<%= @file_path %><%= @file_name %>" id="cropbox" >
+        <%= hidden_field_tag 'file_name', @file_name  %>
+        <%= hidden_field_tag 'file_path', @file_path   %>
+    </span>
+    截圖預覽  :
+  <div style="width:285px;height:175px;overflow:hidden;">
+     <img src="<%= @file_path %><%= @file_name %>" id="preview" />
+  </div>
+
+
+  <% end %>
+
+</body>
+</html>

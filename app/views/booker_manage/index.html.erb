@@ -1,0 +1,228 @@
+<div id="tabs" style="width: 990px;margin: 0px auto;">
+  <ul>
+    <li><a href="#tabs-1">我的訂位記錄</a></li>
+    <li><a href="#tabs-2">我的會員資料</a></li>
+  </ul>
+  <div id="tabs-1">
+    <%= render :partial => 'booking_record' %>
+  </div>
+  <div id="tabs-2">
+
+    <%= render :template => 'devise/registrations/edit',
+               :locals => {
+                       :resource => @booker,
+                       :resource_name => 'user',
+                       :is_booker => @is_booker } %>
+
+    <%# if alert %>
+        <!--<script type="text/javascript">alert("<%# alert %>");</script>-->
+    <%# end %>
+  </div>
+</div>
+
+<!--<div id="cancelBookingModal" class="modal hide fade in" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" name="close_modal">×</button>
+    <h4 id="myModalLabel">取消訂位</h4>
+  </div>
+  <div class="modal-body">
+    <input id="booking_id_hidden_cancel" type="hidden" value="">
+    <label><input type="radio" name="cancel_radio" value="2">同伴無法配合</label>
+    <label><input type="radio" name="cancel_radio" value="3">餐廳當天座位不夠</label>
+    <label><input type="radio" name="cancel_radio" value="4">選擇了其他餐廳</label>
+    <label><input type="radio" name="cancel_radio" value="5">餐廳臨時公休</label>
+    <label><input type="radio" name="cancel_radio" value="6">聚餐延期</label>
+    <label><input type="radio" name="cancel_radio" value="7">其他，因為：</label>
+    <textarea id="cancel_note"></textarea>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" name="cancel_booking_btn_modal">取消訂位</button>
+    <button type="button" class="btn" data-dismiss="modal" aria-hidden="true" name='close_modal'>關閉</button>
+  </div>
+</div>-->
+
+
+
+<div id="cancelBookingDiv" style="display: none; width: 400px">
+  <div>
+    <h4 id="myModalLabel">取消訂位</h4>
+  </div>
+  <div>
+    <input id="booking_id_hidden_cancel" type="hidden" value="">
+    <label style="font-size: 16px;letter-spacing: 1px"><input style="margin-top: -2px" type="radio" name="cancel_radio" value="2">&nbsp同伴無法配合</label>
+    <label style="font-size: 16px;letter-spacing: 1px"><input style="margin-top: -2px" type="radio" name="cancel_radio" value="3">&nbsp餐廳當天座位不夠</label>
+    <label style="font-size: 16px;letter-spacing: 1px"><input style="margin-top: -2px" type="radio" name="cancel_radio" value="4">&nbsp選擇了其他餐廳</label>
+    <label style="font-size: 16px;letter-spacing: 1px"><input style="margin-top: -2px" type="radio" name="cancel_radio" value="5">&nbsp餐廳臨時公休</label>
+    <label style="font-size: 16px;letter-spacing: 1px"><input style="margin-top: -2px" type="radio" name="cancel_radio" value="6">&nbsp聚餐延期</label>
+    <label style="font-size: 16px;letter-spacing: 1px"><input style="margin-top: -2px" type="radio" name="cancel_radio" value="7" checked="true">&nbsp其他：</label>
+    <textarea id="cancel_note"></textarea>
+  </div>
+  <div style="margin-top: 10px">
+    <button class="btn btn-primary" name="cancel_booking_btn_modal">取消訂位</button>
+  </div>
+</div>
+
+<script>
+
+    $('#tabs').tabs({
+        beforeActivate: function (event, ui) {
+            window.location.hash = ui.newPanel.selector;
+        }
+    });
+
+    $('[name=showEdit]').click(function(){
+        $('[name=btn_div]').hide();
+        $('[name=feedback_area]').hide();
+        $('[name=feedback_label]').show();
+        $('[name=showEdit]').show();
+
+        $(this).closest('div').find('a').each(function(){
+            $(this).hide();
+        });
+
+        $(this).closest('div').find('textarea').each(function(){
+            $(this).show();
+        });
+
+        $(this).closest('div').find('label').each(function(){
+            $(this).hide()
+        });
+
+        $(this).closest('div').find('div').each(function(){
+            $(this).show()
+        });
+
+        return false
+    });
+
+    $('[name=close_edit]').click(function(){
+        $('[name=btn_div]').hide();
+        $('[name=feedback_area]').hide();
+        $('[name=feedback_label]').show();
+        $('[name=showEdit]').show();
+    });
+
+    $('[name=save_feedback]').click(function(){
+        var booking_id = ''
+        var feedback = ''
+
+        var obj_area
+        var obj_label
+
+        $(this).parent().parent().closest('div').find('label').each(function(){
+            obj_label = $(this);
+        });
+
+        $(this).parent().parent().closest('div').find('a').each(function(){
+            booking_id = $(this).data('value');
+        });
+
+        $(this).parent().parent().closest('div').find('textarea').each(function(){
+            obj_area = $(this);
+            feedback = $(this).val();
+        });
+
+        $.ajax({
+            url: "/booker_manage/feedback",
+            type: 'POST',
+            data:  {booking_id: booking_id,feedback: feedback},
+            cache: false,
+            async: false,
+            success: function(response){
+                if (response.success){
+                    obj_area.text(feedback);
+                    obj_label.text(feedback);
+
+                    alert(response.data)
+                }
+                else if (response.error){
+                    obj_area.val(obj_label.text())
+                    alert(response.message)
+                }
+                else {
+                    obj_area.val(obj_label.text())
+                    alert('發生未預期的回應，請告知CoDream小組處理!')
+                }
+
+                $('[name=btn_div]').hide();
+                $('[name=feedback_area]').hide();
+                $('[name=feedback_label]').show();
+                $('[name=showEdit]').show();
+            },
+            error: function(){
+                obj_area.val(obj_label.text())
+                $('[name=btn_div]').hide();
+                $('[name=feedback_area]').hide();
+                $('[name=feedback_label]').show();
+                $('[name=showEdit]').show();
+                alert('oops! 出現錯誤了!');
+            }
+        });
+    });
+
+    $('[name=cancel_booking_btn]').click(function(){
+        $('#booking_id_hidden_cancel').val($(this).data('value'))
+        //$('#cancelBookingModal').show()
+
+        var nzData = '/registrations/account_edit';
+        $.fancybox({
+            "href": "#cancelBookingDiv",
+            "width":400,
+            padding: 20,
+            helpers: {
+                overlay: {
+                    locked: false
+                },
+                title: null
+            }
+
+        });
+    });
+
+    //    $('[name=close_modal]').click(function(){
+    //        $('#cancelBookingModal').hide();
+    //    });
+
+    $('[name=cancel_booking_btn_modal]').click(function(){
+
+        var booking_id = $('#booking_id_hidden_cancel').val();
+        var status = $('input[name="cancel_radio"]:checked').val();
+        var cancel_note = $('#cancel_note').val();
+        var status_label = '#' + booking_id;
+        var obj_label = $(status_label);
+
+        var fd_div = '#fd_' + booking_id;
+        var obj_fd = $(fd_div);
+
+        $.ajax({
+            url: '/home/save_cancel_booking',
+            type: 'POST',
+            data:  {booking_id: booking_id, status: status, cancel_note:cancel_note},
+            cache: false,
+            async: false,
+            success: function(response){
+                $.fancybox.close();
+                $('input[name="cancel_radio"]:checked').prop('checked', false);
+                $('#cancel_note').val('');
+                //$('#cancelBookingModal').hide();
+
+                if (response.success){
+                    obj_label.text(response.status_string)
+                    obj_label.addClass('red')
+                    obj_fd.remove();
+                    alert(response.data)
+                }
+                else if (response.error){
+                    alert(response.message)
+                }
+                else {
+                    alert('發生未預期的回應，請告知CoDream小組處理!')
+                }
+            },
+            error: function(){
+                //$('#cancelBookingModal').hide();
+                alert('oops! 出現錯誤了!');
+            }
+        });
+    });
+</script>

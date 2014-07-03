@@ -1,0 +1,170 @@
+
+<% if @select_date %>
+
+    <div style="font-size: 18px;letter-spacing: 0.5px;margin-bottom: 10px">
+      建立
+      <span style="color: rgb(127,23,0)"><%= @select_date %></span>
+      供位條件：
+    </div>
+
+    <div style="font-size: 16px;letter-spacing: 0.5px;margin-bottom: 15px;margin-left: 2em">
+      <span class="title"><i class="required">*</i>設立名稱</span>
+      <% if @condition.present? %>
+          <% if @condition.is_special.present? && @condition.is_special == 't' %>
+              <span><input type="text" name="condition_name" value="<%= @condition.name  %>" required="required" placeholder="ex:2014農曆春節"></span>
+          <% else%>
+              <span><input type="text" name="condition_name" value="<%= @select_date %>" required="required" placeholder="ex:2014農曆春節"></span>
+          <% end %>
+      <% else %>
+          <span><input type="text" name="condition_name" value="<%= @select_date %>" required="required" placeholder="ex:2014農曆春節"></span>
+      <% end %>
+    </div>
+
+    <div style="font-size: 16px;letter-spacing: 0.5px;margin-bottom: 15px;margin-left: 2em">
+      <label style="font-size: 16px;letter-spacing: 0.5px">
+        <input style="margin-top: -2px" type="checkbox" name="is_vacation" value="t" <%= @is_vacation == 't' ? 'checked="checked"' : '' %>>
+        休假日 <span style="color: red">( 勾選休假後，當日不開放訂餐，且忽略以下條件設定 )</span>
+      </label>
+    </div>
+
+<% end %>
+
+<table class="period table table-bordered">
+  <tr>
+    <td style="width: 6%;">啟用 </td>
+    <td style="width: 27%;">時段名稱</td>
+    <td style="width: 27%;">時段區間</td>
+    <td style="width: 13%;">總供位</td>
+    <td style="width: 14%;">15分鐘總供位 <a title="" class="ans" data-original-title="為避免餐廳無法在短時間接待太大量的客人，因此設定每15分鐘內的總訂位客人不超過一定的數量，以保持良好的服務品質。">?</a></td>
+    <td style="width: 13%;">單次供位 <a title="" class="ans" data-original-title="該時段餐廳能提供給單批客人桌椅的最大數量限制。">?</a></td>
+  </tr>
+  <input name="special_day" type="hidden" value="<%= @select_date %>">
+
+  <% @time_zones.each_with_index do |t, index|%>
+      <tr>
+        <td>
+          <% if t.status == 't' %>
+              <input type="checkbox" name="zone<%= index %>[enable]" checked="true">
+          <% else %>
+              <input type="checkbox" name="zone<%= index %>[enable]">
+          <% end %>
+        </td>
+        <td><input style="width: 160px" type="text" name="zone<%= index %>[name]" value="<%= t.name %>">
+
+        <td>
+          <select style="width: 80px" name="zone<%= index %>[time_begin]" data-value="<%= t.range_begin %>">
+            <option value="00:30">00:30</option>
+            <option value="01:00">01:00</option>
+            <option value="01:30">01:30</option>
+            <option value="02:00">02:00</option>
+            <option value="02:30">02:30</option>
+            <option value="03:00">03:00</option>
+            <option value="03:30">03:30</option>
+            <option value="04:00">04:00</option>
+            <option value="04:30">04:30</option>
+            <option value="05:00">05:00</option>
+            <option value="05:30">05:30</option>
+            <option value="06:00">06:00</option>
+            <option value="06:30">06:30</option>
+            <option value="07:00">07:00</option>
+            <option value="07:30">07:30</option>
+            <option value="08:00">08:00</option>
+            <option value="08:30">08:30</option>
+            <option value="09:00">09:00</option>
+            <option value="09:30">09:30</option>
+            <option value="10:00">10:00</option>
+            <option value="10:30">10:30</option>
+            <option value="11:00">11:00</option>
+            <option value="11:30">11:30</option>
+            <option value="12:00">12:00</option>
+            <option value="12:30">12:30</option>
+            <option value="13:00">13:00</option>
+            <option value="13:30">13:30</option>
+            <option value="14:00">14:00</option>
+            <option value="14:30">14:30</option>
+            <option value="15:00">15:00</option>
+            <option value="15:30">15:30</option>
+            <option value="16:00">16:00</option>
+            <option value="16:30">16:30</option>
+            <option value="17:00">17:00</option>
+            <option value="17:30">17:30</option>
+            <option value="18:00">18:00</option>
+            <option value="18:30">18:30</option>
+            <option value="19:00">19:00</option>
+            <option value="19:30">19:30</option>
+            <option value="20:00">20:00</option>
+            <option value="20:30">20:30</option>
+            <option value="21:00">21:00</option>
+            <option value="21:30">21:30</option>
+            <option value="22:00">22:00</option>
+            <option value="22:30">22:30</option>
+            <option value="23:00">23:00</option>
+            <option value="23:30">23:30</option>
+            <option value="24:00">24:00</option>
+          </select>
+          ~
+          <select style="width: 80px" name="zone<%= index %>[time_end]" data-value="<%= t.range_end %>">
+            <option value="00:30">00:30</option>
+            <option value="01:00">01:00</option>
+            <option value="01:30">01:30</option>
+            <option value="02:00">02:00</option>
+            <option value="02:30">02:30</option>
+            <option value="03:00">03:00</option>
+            <option value="03:30">03:30</option>
+            <option value="04:00">04:00</option>
+            <option value="04:30">04:30</option>
+            <option value="05:00">05:00</option>
+            <option value="05:30">05:30</option>
+            <option value="06:00">06:00</option>
+            <option value="06:30">06:30</option>
+            <option value="07:00">07:00</option>
+            <option value="07:30">07:30</option>
+            <option value="08:00">08:00</option>
+            <option value="08:30">08:30</option>
+            <option value="09:00">09:00</option>
+            <option value="09:30">09:30</option>
+            <option value="10:00">10:00</option>
+            <option value="10:30">10:30</option>
+            <option value="11:00">11:00</option>
+            <option value="11:30">11:30</option>
+            <option value="12:00">12:00</option>
+            <option value="12:30">12:30</option>
+            <option value="13:00">13:00</option>
+            <option value="13:30">13:30</option>
+            <option value="14:00">14:00</option>
+            <option value="14:30">14:30</option>
+            <option value="15:00">15:00</option>
+            <option value="15:30">15:30</option>
+            <option value="16:00">16:00</option>
+            <option value="16:30">16:30</option>
+            <option value="17:00">17:00</option>
+            <option value="17:30">17:30</option>
+            <option value="18:00">18:00</option>
+            <option value="18:30">18:30</option>
+            <option value="19:00">19:00</option>
+            <option value="19:30">19:30</option>
+            <option value="20:00">20:00</option>
+            <option value="20:30">20:30</option>
+            <option value="21:00">21:00</option>
+            <option value="21:30">21:30</option>
+            <option value="22:00">22:00</option>
+            <option value="22:30">22:30</option>
+            <option value="23:00">23:00</option>
+            <option value="23:30">23:30</option>
+            <option value="24:00">24:00</option>
+          </select>
+        </td>
+        <td><input style="text-align: right; width: 30px" type="text" name="zone<%= index %>[total_allow]" value="<%= t.total_allow %>"></td>
+        <td><input style="text-align: right; width: 30px" type="text" name="zone<%= index %>[fifteen_allow]" value="<%= t.fifteen_allow %>"></td>
+        <td><input style="text-align: right; width: 30px" type="text" name="zone<%= index %>[each_allow]" value="<%= t.each_allow %>"></td>
+      </tr>
+  <% end %>
+</table>
+
+<% if @select_date %>
+    <% if @condition.present? && @condition.is_special.present? && @condition.is_special == 't' %>
+        <input class="btn btn-primary" type="submit" value="確定修改" style="float: right;margin-right:0px;margin-top: -19px">
+    <% else %>
+        <input class="btn btn-primary" type="submit" value="確定新增" style="float: right;margin-right:0px;margin-top: -19px">
+    <% end %>
+<% end %>

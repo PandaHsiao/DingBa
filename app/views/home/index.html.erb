@@ -1,0 +1,137 @@
+<div class="wapper_out" id="wrapper_out">
+  <div id="wrapper">
+    <div id="head">
+      <div class="top_left">
+        <div class="logo"><img src="/assets/home_index/index_03.jpg" width="661" height="133" alt="" /></div>
+        <div class="bu_login"><a href="/sessions/booker_new">登入</a></div>
+        <div class="bu_login_01">│</div>
+        <div class="bu_login"><a href="/registrations/booker_new">註冊</a></div>
+      </div>
+      <div class="top_right"><img src="/assets/home_index/right.png" width="212" height="200" /></div>
+    </div>
+
+    <div class="fluid_container">
+      <div class="camera_wrap camera_magenta_skin" id="camera_wrap">
+        <div data-src="/home/banner03.jpg" data-link="http://dingba.tw/r/4d1d73" data-transPeriod="1500"></div>
+        <div data-src="/home/banner01.jpg" data-link="http://dingba.tw/r/9d9c3a" data-transPeriod="1500"></div>
+        <div data-src="/home/banner02.jpg" data-link="http://dingba.tw/r/aa3a3d" data-transPeriod="1500"></div>
+      </div>
+    </div>
+    <div style="clear:both; display:block; height:0px"></div>
+
+    <div id="main">
+      <div id="main_top">
+        <div class="left_left">
+          <div id="left">
+            <div class="main_top_title">餐廳登入流程</div>
+
+            <div class="left_b">
+              <div class="red_01"><img src="/assets/home_index/red_01.gif" width="93" height="116" /></div>
+              <div class="red_02">
+                <a id="get_invite_code" href="#" class="fancybox" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image25','','/assets/home_index/index_up.jpg',1)">
+                  <img src="/assets/home_index/red_02.jpg" name="Image25" width="208" height="116" border="0" id="Image25" />
+                </a>
+              </div>
+
+              <div class="red_03"><img src="/assets/home_index/red_03.gif" width="358" height="116" /></div>
+            </div>
+
+            <div class="main_top_title">消費者訂位流程</div>
+            <div class="left_a"><img src="/assets/home_index/index_14.jpg" width="659" height="116" /></div>
+            <div class="left_b"></div>
+          </div>
+        </div>
+        <div class="right">
+          <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fdingba8&amp;width=325&amp;height=290&amp;colorscheme=light&amp;show_faces=true&amp;header=true&amp;stream=false&amp;show_border=true" scrolling="No" frameborder="0" style="border:none; overflow:hidden; width:325px; height:290px;" allowtransparency="true"></iframe>
+        </div>
+      </div>
+      <div class="title_main">人氣餐廳推薦</div>
+
+      <% @restaurants.each_with_index do |x, i| %>
+          <% if i % 3 == 0 %>
+              <div class="box">
+                <div class="box_title"><%= x.name %></div>
+                <a href="/r/<%= x.res_url %>"><div class="box_pic"><img src="/res/home/images/<%= x.home_img %>" width="285" height="175" /></div></a>
+                <div class="box_add"> 地址：<%= x.city %> <%= x.area %> <%= x.address %></div>
+                <div class="box_add"> 平均價位：$ <%= x.price_from %>元 ~ $ <%= x.price_to %>元</div>
+                <div class="goto"><a href="/r/<%= x.res_url %>" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image22','','/assets/home_index/goto_up.png',1)"><img src="/assets/home_index/goto.png" alt="" name="Image22" width="78" height="22" border="0" id="Image22" /></a></div>
+              </div>
+          <% elsif i % 3 == 1 %>
+              <div class="box_m">
+                <div class="box_title"><%= x.name %></div>
+                <a href="/r/<%= x.res_url %>"><div class="box_pic"><img src="/res/home/images/<%= x.home_img %>" width="285" height="175" /></div></a>
+                <div class="box_add"> 地址：<%= x.city %> <%= x.area %> <%= x.address %></div>
+                <div class="box_add"> 平均價位：$ <%= x.price_from %>元 ~ $ <%= x.price_to %>元</div>
+                <div class="goto"><a href="/r/<%= x.res_url %>" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image23','','/assets/home_index/goto_up.png',1)"><img src="/assets/home_index/goto.png" alt="" name="Image23" width="78" height="22" border="0" id="Image23" /></a></div>
+              </div>
+          <% elsif i % 3 == 2 %>
+              <div class="box_right">
+                <div class="box_title"><%= x.name %></div>
+                <a href="/r/<%= x.res_url %>"><div class="box_pic"><img src="/res/home/images/<%= x.home_img %>" width="285" height="175" /></div></a>
+                <div class="box_add"> 地址：<%= x.city %> <%= x.area %> <%= x.address %></div>
+                <div class="box_add"> 平均價位：$ <%= x.price_from %>元 ~ $ <%= x.price_to %>元</div>
+                <div class="goto"><a href="/r/<%= x.res_url %>" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image24','','/assets/home_index/goto_up.png',1)"><img src="/assets/home_index/goto.png" alt="" name="Image24" width="78" height="22" border="0" id="Image24" /></a></div>
+              </div>
+          <% end %>
+      <% end %>
+    </div>
+
+    <div class="main_top_title_pading"><strong>合作夥伴</strong></div>
+    <div class="ad_01">
+    <% for row in 1..$my_friends_list.num_rows %>
+        <a href="<%=$my_friends_list[row,2]%>"> <%=$my_friends_list[row,1]%>  </a> ●
+    <% end %>
+    </div>
+
+
+    <div class="footer_about">
+      <div class="footer_bu"><a href="#">關於我們</a></div>
+      <div class="footer_bu"><a href="#">會員條款</a></div>
+      <div class="footer_bu"><a href="#">常見問與答</a></div>
+    </div>
+    <div class="hr_gray_s"></div>
+    <div class="footer">此訂位平台為免費資源，不收取任何費用，由 CoDream 團隊提供。<br />
+      © 2013 CoDream. All Rights Reserved. </div>
+    <div class="footer_facebook">
+      <div class="footer_bu_facebook"><a href="https://www.facebook.com/dingba8" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('facebook','','/assets/home_index/facebook_35.png',1)"><img src="/assets/home_index/facebook_gray_35.png" alt="facebook" name="facebook" width="40" height="40" border="0" id="facebook" /></a></div>
+      <div class="footer_bu_facebook"><a href="#" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('blog','','/assets/home_index/facebook_37.png',1)"><img src="/assets/home_index/facebook_gray_37.png" alt="blog" name="blog" width="40" height="40" border="0" id="blog" /></a></div>
+      <div class="footer_bu_facebook"><a href="mailto:cs.dingba@codream.tw" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('mail','','/assets/home_index/facebook_39.png',1)"><img src="/assets/home_index/facebook_gray_39.png" alt="mailto:cs.dingba@codream.tw" name="mail" width="40" height="40" border="0" id="mail" /></a></div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+    jQuery.browser = {};
+    (function () {
+        jQuery.browser.msie = false;
+        jQuery.browser.version = 0;
+        if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+            jQuery.browser.msie = true;
+            jQuery.browser.version = RegExp.$1;
+        }
+    })();
+
+    $(function () {
+        $('#camera_wrap').camera({
+            piePosition: 'rightBottom',
+            height: '420',
+            width: '990',
+            loader: 'pie',
+            time: 4000,
+            pagination: false,
+            thumbnails: false,
+            pagination: true,
+            //fx:'simpleFade'
+
+        });
+    });
+
+</script>
+
+
+
+
+
+
+

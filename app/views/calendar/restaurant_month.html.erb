@@ -1,0 +1,106 @@
+<select id="year" class="month_picker" style="margin-left: -30px;width: 80px" data-value="<%= @year %>">
+  <option value="2014">2014</option>
+  <option value="2015">2015</option>
+  <option value="2016">2016</option>
+</select>
+年
+<select id="month" class="month_picker" style="width: 70px" data-value="<%= @month %>">
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+  <option value="6">6</option>
+  <option value="7">7</option>
+  <option value="8">8</option>
+  <option value="9">9</option>
+  <option value="10">10</option>
+  <option value="11">11</option>
+  <option value="12">12</option>
+</select>
+月
+
+<table id="calendar" class="table table-bordered" style="margin-left: -30px;width: 950px">
+  <tr>
+    <th>日</th>
+    <th>一</th>
+    <th>二</th>
+    <th>三</th>
+    <th>四</th>
+    <th>五</th>
+    <th>六</th>
+  </tr>
+
+  <input id="year" type="hidden" value="<%= @year %>">
+
+  <% @calendar_data.each_with_index do |x, i| %>
+
+      <%= tag('tr') if i % 7 == 0 %>
+
+      <td data-id="<%= x.con_id %>" class="cell" style="vertical-align:baseline">
+        <% if x.day != 0 %>
+            <div class="date" style="font-size: 16px;margin-top: 0;color: #5E5E5E;margin-bottom: 5px;"><%= @month %>/<%= x.day %></div>
+        <% end %>
+
+        <div>
+          <% if x.con_id == 0 %>
+              不提供訂位
+              <table class="clean-table" style="font-size: 14px">
+                <% if !@books[i].other.blank? && @books[i].other > 0 %>
+                    <tr>
+                      <td style="vertical-align:baseline">其他時段</td>
+                      <td style="text-align: right;vertical-align:baseline"><%= @books[i].other%></td>
+                    </tr>
+                <% end %>
+              </table>
+          <% else %>
+              <% if x.is_vacation %>
+
+                  休假
+                  <table class="clean-table" style="font-size: 14px">
+                    <% if !@books[i].other.blank? && @books[i].other > 0 %>
+                        <tr>
+                          <td style="vertical-align:baseline">其他時段</td>
+                          <td style="text-align: right;vertical-align:baseline"><%= @books[i].other%></td>
+                        </tr>
+                    <% end %>
+                  </table>
+              <% else %>
+                  <table class="clean-table" style="font-size: 14px">
+                    <% (1..6).each do |j| %>
+                        <% unless x.method("n#{j}".to_sym).call.blank? %>
+                            <tr>
+                              <td style="vertical-align:baseline;width: 55%"><%= x.method("n#{j}".to_sym).call %></td>
+                              <%
+                                 if @books[i].method("zone#{j}".to_sym).call >0
+                                   style_highlight=';color: red;font-weight: bold'
+                                 else
+                                   style_highlight=''
+                                 end
+                              %>
+                              <td style="text-align: right;vertical-align:baseline<%=style_highlight%>"><%= @books[i].method("zone#{j}".to_sym).call %>/ <%= x.method("z#{j}".to_sym).call %></td>
+                            </tr>
+                        <% end %>
+                    <% end %>
+                    <% if !@books[i].other.blank? && @books[i].other > 0 %>
+                        <tr>
+                          <td style="vertical-align:baseline;color: red;font-weight: bold">其他時段</td>
+                          <td style="text-align: right;vertical-align:baseline;color: red;font-weight: bold"><%= @books[i].other%></td>
+                        </tr>
+                    <% end %>
+                  </table>
+              <% end %>
+          <% end %>
+        </div>
+      </td>
+
+      <%= tag('/tr') if i % 7 == 6 %>
+
+  <% end %>
+</table>
+<div id="show"></div>
+<script>
+    id_with_name = <%= raw @id_with_name.to_json %>
+</script>
+
+

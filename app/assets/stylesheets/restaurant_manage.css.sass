@@ -1,0 +1,304 @@
+/*
+ * 後端基本界面設定
+ *
+ *= require bootstrap
+ *= require jquery.ui.datepicker
+ *= require jquery.ui.tabs
+ *= require application
+ */
+.header
+  margin: 8px 0
+
+.btn
+  background-color: #bbbbbb //#D6D6D6
+  border: 2px solid #bbbbbb //#BFBFBF
+  box-shadow: none
+  text-shadow: none
+  background-image: none
+  font-weight: 700
+  border-radius: 8
+  margin-right: 8px
+  color: white
+.btn:hover
+  background-color: #db301c
+  border-color: #db301c
+  color: white
+.btn:focus
+  background-color: #db301c
+  border-color: #db301c
+  color: white
+
+.btn-primary
+  background-color: #1893db
+  border-color: #1384c6
+.btn-primary:hover
+  background-color: #db301c
+  border-color: #db301c
+.btn-primary:focus
+  background-color: #db301c
+  border-color: #db301c
+
+td.title
+  text-align: right
+  font-size: 16px
+
+.cover
+  border: 1px solid #FF0000 !important
+
+#tab_day_booking
+  font-size: 14px
+
+#statement
+  text-align: center
+  background-color: #5E5E5E
+  color: #FFFFFF
+  line-height: 32px
+
+
+
+.now
+  //color: rgb(127,23,0)  // 222  34 26
+  color: rgb(222,34,26)
+.now:hover
+  //color: rgb(127,23,0)  // 222  34 26
+  color: rgb(222,34,26)
+
+.time_between
+  width: 100%
+  border: none
+  td
+    border: none
+
+.period
+  td
+    text-align: center
+  .center
+    width: 50%
+
+#main
+  margin-top: 20px
+
+#process
+  background-color: rgb(234,234,234)
+  font-size: 22px
+  line-height: 48px
+  text-align: center
+  .mark
+    border: 1px solid #000000
+    background-color: #FFFFFF
+
+#sidebar
+  border: 2px solid #BFBFBF
+  background-color: rgb(240,240,240)
+  border-radius: 10px
+  padding: 5px 10px
+  margin-bottom: 8px
+  > a
+    display: block
+    font-size: 16px
+    line-height: 35px
+    text-decoration: none
+    margin-top: 5px
+  > a:hover
+    text-decoration: none
+  > a:before
+    content: '• '
+  > .now:focus
+    //color: #7F1700    // 222  34 26
+    color: rgb(222,34,26)
+
+#wrapper
+  height: 0
+  overflow: hidden
+  table
+    td
+      text-align: left
+      border: none
+      padding: 6px 8px
+      // border-bottom: 1px solid #dddddd
+
+#sub_choice, #sub_choice2
+  border: 1px solid rgb(190,190,190)
+  width: 90px
+  text-align: center
+  overflow: hidden
+  margin-bottom: 10px
+  margin-left: 10px
+  .now
+    //background-color: rgb(127,23,0)      // 222  34 26
+    background-color: rgb(222,34,26)
+    color: #FFFFFF
+  a
+    display: block
+    border: 1px solid rgb(190,190,190)
+
+#link
+  bottom: 33px
+  position: absolute
+  right: 0
+  input
+    background-color: #FFFFFF
+    cursor: default
+
+#pics
+  margin: 8px 0
+  .float
+    margin: 1px 6px
+  width: 100%
+  .placeholder
+    width: 135px
+    height: 120px
+    border: 1px solid rgb(190,190,190)
+    background-color: rgb(234,234,234)
+    overflow: hidden
+    img
+      display: block
+      margin: auto
+      position: absolute
+      top: 0
+      bottom: 0
+      left: 0
+      right: 0
+  .icon-remove
+    margin: 5px auto
+    position: relative
+    display: block
+
+#period_set
+  border: 2px solid rgb(190,190,190)
+  margin: 10px 0
+  width: 300px
+  cursor: move
+  .sortable
+    margin: 10px 10px
+
+.dropdown
+  float: left
+.dropdown > a
+  display: block
+  width: 100px
+  background-color: rgb(234,234,234)
+  border: 2px solid rgb(190,190,190)
+  padding: 0 5px
+  overflow: hidden
+
+#special_time
+  margin: 10px 0
+  width: 300px
+  .row
+    margin: 10px 10px
+
+#reserve_table
+  margin: 12px 0
+  td
+    padding: 4px 4px
+
+#datepicker
+  display: none
+
+#calendar
+  margin: 12px 0
+  //.date
+  //  font-size: 12px
+  //  color: #bbbbbb
+  > td
+    width: 14%
+  .clean-table
+    border: none
+    width: 100%
+    font-size: 14px
+    td
+      border: none
+      padding: 0
+
+#lightbox_wrap
+  position: fixed
+  z-index: 99
+  background-color: rgba(0,0,0,0.5)
+  width: 100%
+  height: 100%
+  left: 0
+  top: 0
+  display: none
+
+#lightbox
+  position: absolute
+  margin: 100px auto auto 100px
+  background-color: #ffffff
+  border: 2px solid rgb(190,190,190)
+  width: 900px
+  overflow: auto
+
+.daily_info
+  position: relative
+  margin: 10px 0
+  font-size: 12px
+  .btn
+    font-size: 12px
+  th
+    text-align: left
+  td
+    text-align: center
+  .mark1, .mark2
+    position: absolute
+    top: 0
+    left: 0
+    height: 38px
+    width: 5px
+  .mark1
+    background-color: rgb(190,138,131)
+  .mark2
+    background-color: rgb(218,218,218)
+
+#logo_word
+  font-size: 21px
+  //font-weight: bold
+  //color: rgb(233,147,88)
+  color: rgb(231, 56, 32)
+  top: 72px
+  letter-spacing: 0.5px
+  width: 280px
+  position: absolute
+  bottom: 40px
+
+#res_header
+  background-color: rgb(242,242,242)
+  margin-bottom: 20px
+  height: 150px
+
+#logo
+  width: 150px  //180
+  margin: 5px 10px 0px 10px
+
+#line
+  position: absolute
+  top: 145px
+  bottom: 0
+  right: 200px
+  width: 400px
+
+#go_pic
+  position: absolute
+  top: 55px
+  bottom: 0
+  right: 0
+  width: 220px
+
+.table_header
+  text-align: center
+  font-size: 15px
+  font-weight: 500
+  letter-spacing: 1px
+
+.table_content
+  font-size: 15px
+
+.color_table
+  color: #9f735e
+  color: #444444
+  color: #1E8F25
+  color: #d93e22
+  color: #6081e9
+  color: #e091b2
+  color: #e47836
+  color: #9a73e3

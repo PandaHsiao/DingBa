@@ -1,0 +1,93 @@
+<%= render :partial => '/res_manage/res_header' %>
+<div class="row">
+  <div id="process" class="span12">
+    <span>步驟一 <span class="mark">&nbsp;編寫餐廳資訊&nbsp;</span></span>
+    =>
+    <span class="now">步驟二 <span class="mark">&nbsp;設定開放訂位時間&nbsp;</span></span>
+    =>
+    <span>步驟三 <span class="mark">&nbsp;專屬日曆產生&nbsp;</span></span>
+  </div>
+</div>
+
+<div id="main" class="row-fluid">
+  <div class="span3">
+    <div id="sidebar" class="span8">
+      <ul>
+        <li><a href="#">基本資料</a></li>
+        <li><a href="#" class="now">供位時間</a></li>
+        <li><a href="#">專屬日曆</a></li>
+        <li><a href="#">訂位明細(報表)</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="span9">
+    <table>
+      <tr>
+        <td rowspan="2">
+          請選擇期間：
+        </td>
+        <td>
+          <select name="" class="input-small"></select> 年
+          <select name="" class="input-mini"></select> 月
+          <select name="" class="input-mini"></select> 日
+        </td>
+        <td rowspan="2">
+          至
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <select name="" class="input-small"></select> 年
+          <select name="" class="input-mini"></select> 月
+          <select name="" class="input-mini"></select> 日
+        </td>
+      </tr>
+    </table>
+    <input type="button" value="匯出EXCEL報表" class="btn btn-primary pull-right">
+
+    <table class="table table-bordered">
+      <tr>
+        <td>No.</td>
+        <td>日期</td>
+        <td>時間</td>
+        <td>人數</td>
+        <td>訂位者大名</td>
+        <td>訂位者電話</td>
+        <td>訂位者EMAIL</td>
+        <td>備註</td>
+        <td>是否取消/原因</td>
+      </tr>
+      <% 5.times do |i| %>
+        <tr>
+          <td><%= i+1 %></td>
+          <td>2013-11-08</td>
+          <td>11:00 PM</td>
+          <td>10</td>
+          <td>abc</td>
+          <td>0985254124</td>
+          <td>a@a.a</td>
+          <td></td>
+          <td></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+
+<div id="lightbox_wrap">
+  <div id="lightbox">
+    <div id="tabs">
+      <ul>
+        <li><a href="#tabs-1">修改供位設定</a></li>
+        <li><a href="#tabs-2">訂位資料</a></li>
+      </ul>
+      <div id="tabs-1">
+        供位設定
+      </div>
+      <div id="tabs-2">
+        定位資料
+      </div>
+    </div>
+  </div>
+</div>

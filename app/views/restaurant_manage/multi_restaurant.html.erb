@@ -1,0 +1,43 @@
+
+<div>
+
+
+  <form action="restaurant_manage/create_restaurant" method="post">
+    <input type="submit" class="btn btn-primary" value="新增餐廳" style="letter-spacing: 1px;font-size: 20px">
+  </form>
+
+  <table class="table table-bordered" style="margin-top: 20px;width: 500px">
+    <colgroup>
+      <col style="width: 10%">
+      <col style="width: 75%">
+      <col style="width: 15%">
+    </colgroup>
+
+    <tr>
+      <td class="table_header" style="text-align: center">序號</td>
+      <td class="table_header" style="text-align: center">餐廳名稱</td>
+      <td class="table_header" style="text-align: center"></td>
+    </tr>
+
+    <% @restaurants.each_with_index do |x, i| %>
+        <% if i % 2 == 0 %>
+            <tr style="background-color: rgb(242,242,242)">
+        <% else %>
+            <tr>
+        <% end %>
+        <td class="table_content"><%= i + 1 %></td>
+        <td class="table_content" style="text-align: center"><%= x.name %></td>
+        <td class="table_content" style="text-align: center;">
+          <form action="restaurant_manage/switch_restaurant" method="post">
+            <input type="hidden" name="restaurant_id" value="<%= x.id %>">
+            <input type="submit" class="btn btn-primary" value="切換">
+          </form>
+        </td>
+        </tr>
+    <% end %>
+  </table>
+</div>
+
+<script>
+
+</script>

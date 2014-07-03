@@ -1,0 +1,51 @@
+<%= render :partial => 'res_header' %>
+<div class="row">
+  <div id="process" class="span12">
+    <span>步驟一 <span class="mark">&nbsp;編寫餐廳資訊&nbsp;</span></span>
+    =>
+    <span class="now">步驟二 <span class="mark">&nbsp;設定開放訂位時間&nbsp;</span></span>
+    =>
+    <span>步驟三 <span class="mark">&nbsp;專屬日曆產生&nbsp;</span></span>
+  </div>
+</div>
+
+<div id="main" class="row-fluid">
+  <div class="span3">
+    <div id="sidebar" class="span8">
+      <ul>
+        <li><a href="#">基本資料</a></li>
+        <li><a href="#" class="now">供位時間</a></li>
+        <li><a href="#">專屬日曆</a></li>
+        <li><a href="#">訂位明細(報表)</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="span9">
+    <a href="" class="btn btn-primary" style="font-size: 13px"><i class="icon-plus icon-white"></i> 新增一組可供訂位的時間</a><br>
+    已設立時間：<br>
+    <table id="period_set">
+      <% 3.times do %>
+      <tr class="sortable">
+        <td>
+          <div class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">平日<b class="caret pull-right"></b></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="">編輯</a></li>
+              <li><a href="">刪除</a></li>
+            </ul>
+          </div>
+        </td>
+        <td>
+          <label class="radio inline"><input type="radio" name="">開啓</label>
+        </td>
+        <td>
+          <label class="radio inline"><input type="radio" name="">關閉</label>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+    <a href="#" id="period_save" class="btn btn-primary">確定修改</a> <a href="#" id="period_reset" class="btn">取消</a><br><br>
+因特別時段 / 節慶設定的供位時間會與日常供位時間發生重疊，<br>
+請餐廳經營者設定時間的優先順序(以滑鼠拖曳方式，最上面為首)。<br><br>
+  </div>
+</div>

@@ -1,0 +1,203 @@
+<style>
+    .grid {width:100%;}
+        /*.grid thead {margin:100px;}*/
+        /*.grid thead th{line-height:28px;height:28px;border-top:1px #D7D7D4 solid;border-bottom:1px #D7D7D4 solid; color:#666;}*/
+        /*.grid tbody tr{line-height:28px;height:30px;}*/
+        /*.grid tbody td{word-break:break-all;border-bottom:1px #d7d7d7 dotted;}*/
+        /*.grid tfoot tr{ line-height:30px; height:30; background-color:#fff;}*/
+        /*.grid tfoot td{ text-align:right; padding-right:5px;}*/
+        /**grid view 换色**/
+        /*.even{background-color:#FEF8F4;}*/
+        /*.over{background-color: #ffc;}*/
+
+        /*.text-overflow {*/
+        /*display:block;*/
+        /*width:31em;*/
+        /*word-break:keep-all;*/
+        /*white-space:nowrap;*/
+        /*overflow:hidden;*/
+        /*text-overflow:ellipsis;*/
+        /*}*/
+</style>
+
+<div id="main" class="container">
+  <div id="scroll">
+    <div id="booking" class="container">
+      <div class="row-fluid" id="res_info" style="height: 200px">
+        <div style="width: 38%">
+          <div id="pics">
+            <% if @restaurant.pic_name1 != nil %>
+                <div><img src="/res/<%= @restaurant.id %>/images/<%= @restaurant.pic_name1 %>"></div><% end %>
+            <% if @restaurant.pic_name2 != nil %>
+                <div><img src="/res/<%= @restaurant.id %>/images/<%= @restaurant.pic_name2 %>"></div><% end %>
+            <% if @restaurant.pic_name3 != nil %>
+                <div><img src="/res/<%= @restaurant.id %>/images/<%= @restaurant.pic_name3 %>"></div><% end %>
+            <% if @restaurant.pic_name4 != nil %>
+                <div><img src="/res/<%= @restaurant.id %>/images/<%= @restaurant.pic_name4 %>"></div><% end %>
+            <% if @restaurant.pic_name5 != nil %>
+                <div><img src="/res/<%= @restaurant.id %>/images/<%= @restaurant.pic_name5 %>"></div><% end %>
+          </div>
+          <div id="main_pic">
+            <% if @restaurant.front_cover == '1' %>
+                <img src="/res/<%= @restaurant.id %>/images/<%= @restaurant.pic_name1 %>">
+            <% elsif @restaurant.front_cover == '2' %>
+                <img src="/res/<%= @restaurant.id %>/images/<%= @restaurant.pic_name2 %>">
+            <% elsif @restaurant.front_cover == '3' %>
+                <img src="/res/<%= @restaurant.id %>/images/<%= @restaurant.pic_name3 %>">
+            <% elsif @restaurant.front_cover == '4' %>
+                <img src="/res/<%= @restaurant.id %>/images/<%= @restaurant.pic_name4 %>">
+            <% elsif @restaurant.front_cover == '5' %>
+                <img src="/res/<%= @restaurant.id %>/images/<%= @restaurant.pic_name5 %>">
+            <% end %>
+          </div>
+        </div>
+        <div style="width: 62%;float: right;font-size: 16px;letter-spacing: 0.5px">
+          <table class="grid">
+            <colgroup>
+              <col style="width: 90px">
+              <col style="width: 450px">
+            </colgroup>
+            <tr>
+              <td style="font-size: 16px">餐廳名稱：</td>
+              <td><%= @restaurant.name %></td>
+            </tr>
+            <tr>
+              <td style="font-size: 16px">餐廳地址：</td>
+              <td><%= @address %></td>
+            </tr>
+            <tr>
+              <td style="font-size: 16px">餐廳電話：</td>
+              <td><%= @restaurant.phone %></td>
+            </tr>
+            <tr>
+              <td style="font-size: 16px">餐廳特色：</td>
+              <td><%= @restaurant.feature %></td>
+            </tr>
+            <tr>
+              <td style="font-size: 16px">營業時間：</td>
+              <td><%= @restaurant.business_hours %></td>
+            </tr>
+            <tr>
+              <td style="font-size: 16px">付款方式：</td>
+              <td>
+                <% if @pay_type.include?('1') %>
+                    現金
+                <% end %>
+
+                <% if @pay_type.include?('2') %>
+                    信用卡
+                <% end %>
+
+                <% if @pay_type.include?('3') %>
+                    悠遊卡
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <td style="font-size: 16px">餐廳網址：</td>
+              <td>
+                <% if !@restaurant.url1.blank? %><a href="<%= @restaurant.url1 %>" target="_blank"><%= @restaurant.info_url1 %></a><% end %>
+                <% if !@restaurant.url1.blank? && !@restaurant.url2.blank? %>、<% end %>
+                <% if !@restaurant.url2.blank? %><a href="<%= @restaurant.url2 %>" target="_blank"><%= @restaurant.info_url2 %></a><% end %>
+                <% if !@restaurant.url2.blank? && !@restaurant.url3.blank? %>、<% end %>
+                <% if !@restaurant.url3.blank? %><a href="<%= @restaurant.url3 %>" target="_blank"><%= @restaurant.info_url3 %></a><% end %>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <table style="width: 100%"></table>
+      <div class="row-fluid" id="booking_form_content" style="border-color: rgb(230,230,230); border-width: 3px;">
+        <div class="row-fluid">
+          <div style="float: left; width: 12%;font-size: 16px;text-align: right;letter-spacing: 0.5px;line-height: 24px;margin-left: 10px;">
+            <div style="margin-left: -10px;margin-bottom: 8px;margin-top: -2px">您的訂位資料：</div>
+            用餐日期：<br>
+            用餐人數：<br>
+            訂位者：<br>
+            訂位E-mail：<br>
+            訂位狀態：
+          </div>
+          <div style="float: left; width: 28%;font-size: 16px;letter-spacing: 0.5px;line-height: 24px;margin-left: 10px">
+            <div style="margin-left: -10px;margin-bottom: 8px;margin-top: -2px">&nbsp</div>
+            <%= @booking.booking_time.strftime("%Y/%m/%d %H:%M") %><br>
+            <%= @booking.num_of_people %><br>
+            <%= @booking.name %><br>
+            <%= @booking.email %><br>
+
+            <% if @booking.status == '0' %>
+                已訂位( 未用餐 )
+            <% elsif @booking.status == '1' && @booking.feedback.blank? %>
+                已訂位( 待評論 )
+            <% elsif @booking.status == '1' && !@booking.feedback.blank? %>
+                已訂位( 已評論 )
+            <% else %>
+                <span style="font-size: 16px;color: red;letter-spacing: 0.5px;line-height: 24px;">
+                  <% if @booking.status == '2' %>
+                      取消訂位( 同伴無法配合 )
+                  <% elsif @booking.status == '3' %>
+                      取消訂位( 餐廳當天座位不夠 )
+                  <% elsif @booking.status == '4' %>
+                      取消訂位( 選擇了其他餐廳 )
+                  <% elsif @booking.status == '5' %>
+                      取消訂位( 餐廳臨時公休 )
+                  <% elsif @booking.status == '6' %>
+                      取消訂位( 聚餐延期 )
+                  <% elsif @booking.status == '7' %>
+                      取消訂位( 原因:<%= @booking.cancel_note%> )
+                  <% end %>
+                </span>
+            <% end %>
+
+            <% if @booking.status != '0' && @booking.status != '1' %>
+                <a href="<%= "#{@booking.res_url}" %>" target="_blank" style="text-decoration:none">
+                  <div style="font-size: 20px;width: 150px;height: 36px;margin-top: 10px;text-align: center;background-color: rgb(231, 56, 32);color: #ffffff;padding-top: 10px">
+                    重新訂位
+                  </div>
+                </a>
+            <% end %>
+
+          </div>
+
+          <div style="float: left; width: 57%;font-size: 16px;letter-spacing: 1px">
+            <%= form_for :booking ,:url => "save_cancel_booking_by_email" do |f| %>
+                訂位取消原因：
+                <div style="margin-left: 2em;margin-top: -15px;line-height: 24px">
+                  <%= f.hidden_field :id %><br>
+                  <label style="font-size:16px ;letter-spacing: 1px"><%= f.radio_button :status, "2", checked: @booking.status == '2', :style => 'margin-top:-2px' %> 同伴無法配合</label>
+                  <label style="font-size:16px ;letter-spacing: 1px"><%= f.radio_button :status, "4", checked: @booking.status == '4', :style => 'margin-top:-2px' %> 選擇了其他餐廳</label>
+                  <label style="font-size:16px ;letter-spacing: 1px"><%= f.radio_button :status, "6", checked: @booking.status == '6', :style => 'margin-top:-2px' %> 聚餐延期</label>
+
+                  <% if @booking.status == '0' %>
+                      <label style="font-size:16px ;letter-spacing: 1px"><%= f.radio_button :status, "7", checked: true, :style => 'margin-top:-2px' %> 其他：</label>
+                  <% else %>
+                      <label style="font-size:16px ;letter-spacing: 1px"><%= f.radio_button :status, "7", checked: @booking.status == '7', :style => 'margin-top:-2px' %> 其他：</label>
+                  <% end %>
+
+                  <%= f.text_area :cancel_note, :placeholder => '請輸入其他原因', :style => 'margin-left:20px;width:300px;height:23px;margin-top:5px;padding-left:10px' %>
+                  <br>
+                  <% if @booking.status == '0' %>
+                  <hr color="#lelele" size="3" width="90%">
+                      您訂位的手機號碼：
+                      <%= f.text_field :phone, :placeholder => '為確保取消訂位的是本人', :style => 'width:200px;padding-left:10px' %> <br>
+                      <%= submit_tag "確認取消訂位" , { :class => 'btn btn-primary', :disable_with => 'Processing...' , :style => 'margin-top: 10px'} %>
+                  <% end %>
+                </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    $('#pics div').mouseover(function(){
+        $(this).find("img").each(function(){
+            var scr = $(this).attr('src');
+            $('#main_pic').find("img").each(function(){
+                $(this).attr('src',scr)
+            });
+        });
+    });
+</script>
+

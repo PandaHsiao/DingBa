@@ -1,0 +1,163 @@
+
+<table>
+  <% if @booking_condition.error == true %>
+      <tr>
+        <td style="width: 27%"></td>
+        <td style="width: 73%"></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div style="margin-left: -10px;width: 300px;border-radius: 15px;background-color: rgb(254,219,107);padding: 10px 10px 10px 20px;color: rgb(222,34,26);font-size: 16px;letter-spacing: 1px;line-height: 26px">
+            <%= @booking_condition.message %>
+          </div>
+        </td>
+      </tr>
+  <% end %>
+  <tr>
+    <td style="width: 27%;padding-left: 13px; font-size: 16px">用餐日期：</td>
+    <td style="width: 73%">
+      <input name="restaurant_id" type="hidden" value="<%= @restaurant.id %>">
+      <input name="booker_id" type="hidden" value="<%= @booker.id %>">
+      <input type="text" id="booking_date" style="width:110px; text-align: left; font-size: 16px; padding-left: 5px" value="<%= @booking_day %>">
+    </td>
+  </tr>
+  <tr>
+    <td style="padding-left: 13px;font-size: 16px">用餐人數：</td>
+    <td>
+      <% if @booking_condition.error != true %>
+          <%= select_tag(:booking_people, options_for_select(@booking_condition.option_max_people) , id:'select_people', style: 'width:117px') %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding-left: 13px;font-size: 16px">用餐時段：</td>
+    <td>
+      <% if @booking_condition.error != true %>
+          <%= select_tag(:booking_zone, options_for_select(@booking_condition.option_of_zone) , id:'select_zone', style: 'width:117px') %>
+      <% end %>
+    </td>
+  </tr>
+  <!--<tr>-->
+  <!--<td style="padding-left: 13px;font-size: 16px">-->
+  <!--用餐時間：-->
+  <!--<input type="hidden" name="time" id="time"></td>-->
+  <!--<td></td>-->
+  <!--</tr>-->
+  <tr>
+
+    <input id="now_fifteen_allow" type="hidden" value="">
+    <input id="now_total_allow" type="hidden" value="">
+    <input id="now_total_people" type="hidden" value="">
+    <input id="now_each_allow" type="hidden" value="">
+
+
+    <td id="time_select1" class="t_select" colspan="2" style="display:none">
+      <% @booking_condition.option_of_time.each do |oft| %>
+          <% if oft[5] == 0 %>
+              <input id="z1_fifteen_allow" type="hidden" value="<%= oft[1] %>">
+              <input id="z1_total_allow" type="hidden" value="<%= oft[2] %>">
+              <input id="z1_total_people" type="hidden" value="<%= oft[3] %>">
+              <input id="z1_each_allow" type="hidden" value="<%= oft[4] %>">
+              <% (oft.length - 6).times do |i| %>
+                  <% if oft[i + 6][0] == 0 %>
+                      <input type="button" value='<%= oft[i + 6][1] %>' data-value='<%= oft[0] %>' data-bcount='<%= oft[i + 6][2] %>' class='btn' />
+                  <% elsif oft[i + 6][0] == 1 %>
+                      <input type="button" value='<%= oft[i + 6][1] %>' data-value='<%= oft[0] %>' data-bcount='<%= oft[i + 6][2] %>' class='btn btn-inverse' />
+                  <% end %>
+              <% end %>
+          <% end %>
+      <% end %>
+    </td>
+
+    <td id="time_select2" class="t_select" colspan="2" style="display:none">
+      <% @booking_condition.option_of_time.each do |oft| %>
+          <% if oft[5] == 1 %>
+              <input id="z2_fifteen_allow" type="hidden" value="<%= oft[1] %>">
+              <input id="z2_total_allow" type="hidden" value="<%= oft[2] %>">
+              <input id="z2_total_people" type="hidden" value="<%= oft[3] %>">
+              <input id="z2_each_allow" type="hidden" value="<%= oft[4] %>">
+              <% (oft.length - 6).times do |i| %>
+                  <% if oft[i + 6][0] == 0 %>
+                      <input type="button" value='<%= oft[i + 6][1] %>' data-value='<%= oft[0] %>' data-bcount='<%= oft[i + 6][2] %>' class='btn' />
+                  <% elsif oft[i + 6][0] == 1 %>
+                      <input type="button" value='<%= oft[i + 6][1] %>' data-value='<%= oft[0] %>' data-bcount='<%= oft[i + 6][2] %>' class='btn btn-inverse' />
+                  <% end %>
+              <% end %>
+          <% end %>
+      <% end %>
+    </td>
+
+    <td id="time_select3" class="t_select" colspan="2" style="display:none">
+      <% @booking_condition.option_of_time.each do |oft| %>
+          <% if oft[5] == 2 %>
+              <input id="z3_fifteen_allow" type="hidden" value="<%= oft[1] %>">
+              <input id="z3_total_allow" type="hidden" value="<%= oft[2] %>">
+              <input id="z3_total_people" type="hidden" value="<%= oft[3] %>">
+              <input id="z3_each_allow" type="hidden" value="<%= oft[4] %>">
+              <% (oft.length - 6).times do |i| %>
+                  <% if oft[i + 6][0] == 0 %>
+                      <input type="button" value='<%= oft[i + 6][1] %>' data-value='<%= oft[0] %>' data-bcount='<%= oft[i + 6][2] %>' class='btn' />
+                  <% elsif oft[i + 6][0] == 1 %>
+                      <input type="button" value='<%= oft[i + 6][1] %>' data-value='<%= oft[0] %>' data-bcount='<%= oft[i + 6][2] %>' class='btn btn-inverse' />
+                  <% end %>
+              <% end %>
+          <% end %>
+      <% end %>
+    </td>
+
+    <td id="time_select4" class="t_select" colspan="2" style="display:none">
+      <% @booking_condition.option_of_time.each do |oft| %>
+          <% if oft[5] == 3 %>
+              <input id="z4_fifteen_allow" type="hidden" value="<%= oft[1] %>">
+              <input id="z4_total_allow" type="hidden" value="<%= oft[2] %>">
+              <input id="z4_total_people" type="hidden" value="<%= oft[3] %>">
+              <input id="z4_each_allow" type="hidden" value="<%= oft[4] %>">
+              <% (oft.length - 6).times do |i| %>
+                  <% if oft[i + 6][0] == 0 %>
+                      <input type="button" value='<%= oft[i + 6][1] %>' data-value='<%= oft[0] %>' data-bcount='<%= oft[i + 6][2] %>' class='btn' />
+                  <% elsif oft[i + 6][0] == 1 %>
+                      <input type="button" value='<%= oft[i + 6][1] %>' data-value='<%= oft[0] %>' data-bcount='<%= oft[i + 6][2] %>' class='btn btn-inverse' />
+                  <% end %>
+              <% end %>
+          <% end %>
+      <% end %>
+    </td>
+
+    <td id="time_select5" class="t_select" colspan="2" style="display:none">
+      <% @booking_condition.option_of_time.each do |oft| %>
+          <% if oft[5] == 4 %>
+              <input id="z5_fifteen_allow" type="hidden" value="<%= oft[1] %>">
+              <input id="z5_total_allow" type="hidden" value="<%= oft[2] %>">
+              <input id="z5_total_people" type="hidden" value="<%= oft[3] %>">
+              <input id="z5_each_allow" type="hidden" value="<%= oft[4] %>">
+              <% (oft.length - 6).times do |i| %>
+                  <% if oft[i + 6][0] == 0 %>
+                      <input type="button" value='<%= oft[i + 6][1] %>' data-value='<%= oft[0] %>' data-bcount='<%= oft[i + 6][2] %>' class='btn' />
+                  <% elsif oft[i + 6][0] == 1 %>
+                      <input type="button" value='<%= oft[i + 6][1] %>' data-value='<%= oft[0] %>' data-bcount='<%= oft[i + 6][2] %>' class='btn btn-inverse' />
+                  <% end %>
+              <% end %>
+          <% end %>
+      <% end %>
+    </td>
+
+    <td id="time_select6" class="t_select" colspan="2" style="display:none">
+      <% @booking_condition.option_of_time.each do |oft| %>
+          <% if oft[5] == 5 %>
+              <input id="z6_fifteen_allow" type="hidden" value="<%= oft[1] %>">
+              <input id="z6_total_allow" type="hidden" value="<%= oft[2] %>">
+              <input id="z6_total_people" type="hidden" value="<%= oft[3] %>">
+              <input id="z6_each_allow" type="hidden" value="<%= oft[4] %>">
+              <% (oft.length - 6).times do |i| %>
+                  <% if oft[i + 6][0] == 0 %>
+                      <input type="button" value='<%= oft[i + 6][1] %>' data-value='<%= oft[0] %>' data-bcount='<%= oft[i + 6][2] %>' class='btn' />
+                  <% elsif oft[i + 6][0] == 1 %>
+                      <input type="button" value='<%= oft[i + 6][1] %>' data-value='<%= oft[0] %>' data-bcount='<%= oft[i + 6][2] %>' class='btn btn-inverse' />
+                  <% end %>
+              <% end %>
+          <% end %>
+      <% end %>
+    </td>
+
+  </tr>
+</table>

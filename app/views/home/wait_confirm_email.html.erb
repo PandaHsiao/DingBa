@@ -1,0 +1,31 @@
+
+
+<div style="text-align: center;font-size: 24px;letter-spacing: 1px; line-height: 50px;margin-top: 40px;color: rgb(153,153,153);margin-bottom: 100px;">
+  註冊確認信已經發出<br>
+  請至您 <span style="color: #7F1700;letter-spacing: 0"><%= @user_email %></span> 信箱收信<br>
+  點擊信件內確認連結，
+  方能完成註冊<br>
+
+  <span id="resend_confirm_email"><a href="#" style="color: red">沒收到確認信?</a></span>
+</div>
+
+
+<script>
+    $('#resend_confirm_email').click(function(){
+        var nzData = '/confirmation/resend_confirm_email';
+
+        $.get(nzData, function(html) {
+            $.fancybox({
+                "content":html,
+                "width":400,
+                padding: 20,
+                helpers: {
+                    overlay: {
+                        locked: false
+                    },
+                    title: null
+                }
+            });
+        });
+    });
+</script>

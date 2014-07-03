@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+      div {
+          position: relative;
+      }
+      a {
+          color: #0000FF;
+      }
+  </style>
+</head>
+<body>
+<!--<div style="display: block;margin-left: auto;margin-right: auto;width: 800px;border-radius: 15px;background-color:rgb(137,181,84);padding-top: 10px;padding-bottom: 5px;color:rgb(52,52,52) ">-->
+<div style="display: block;margin-left: auto;margin-right: auto;width: 800px;border-radius: 15px;padding-top: 10px;padding-bottom: 5px; ">
+  <div style="margin-left: 180px">
+    <%= image_tag "rae_logo_guest.png", :style => "width: 220px;" %>
+    <%= image_tag "slogan.png", :style => "width: 220px;" %>
+    <!--<img src="<%# "#{@domain_clear}" "assets/common/rae_logo_guest.png" %>" style="width: 220px">-->
+  </div>
+
+  <!--<div style="margin-left: 30px;margin-bottom: 20px;background-color: rgb(235,235,235);width: 710px;padding: 10px 20px 10px 10px;border-radius: 15px;">-->
+  <div style="margin-left: 30px;margin-bottom: 20px;width: 710px;padding: 10px 20px 10px 10px;border-radius: 15px;">
+    <div style="font-size: 16px;letter-spacing: 1px;margin-bottom: 5px;line-height: 26px;margin-left: 30px">
+      Hi, <%= @booking.name %><br>
+      <span style="margin-left: 2em">
+        您在
+        <span style="color: blue">
+          <a href="<%= "#{@booking.res_url}" %>"  target="_blank">
+            <%= @booking.restaurant_name %>
+          </a>
+        </span>
+        的訂位已完成，詳細資料如以下：
+      </span>
+    </div>
+
+    <hr style="border: 1; width: 100%;color: rgb(55,55,55)">
+
+    <div style="margin: 5px 0 5px 30px;width: 680px;padding-top: 5px;letter-spacing: 0.5px">
+      <div style="float: left; font-size: 16px; width: 19%;line-height: 26px;text-align: right;">
+        餐廳：<br>
+        用餐日期：<br>
+        訂位人數：<br>
+        訂位者：<br>
+        <!--訂位者電話：<br>-->
+        訂位者備註：<br>
+        餐廳地址：<br>
+      </div>
+
+      <div style="float: right; font-size: 16px; width: 81%; margin-bottom: 15px;line-height: 26px">
+        <span style="color: blue"><a href="<%= "#{@booking.res_url}" %>" target="_blank"><%= @booking.restaurant_name %></a></span><br>
+        <span style="color: red;letter-spacing: 0.5px"><%= @booking.booking_time.strftime("%Y/%m/%d %H:%M") %></span><br>
+        <%= @booking.num_of_people %><br>
+        <%= @booking.name %><br>
+        <!--<%# @booking.phone %><br>-->
+        <%= @booking.remark %><br>
+        <%= @booking.restaurant_address %><br>
+      </div>
+    </div>
+    <table style="width: 100%"></table>
+    <div style="margin-top: 10px; margin-left: 60px;font-size: 16px;line-height: 26px;letter-spacing: 0.5px;width: 500px">
+      如果您對此訂位訊息有疑問或想修改訂位，<br>
+      請麻煩撥電餐廳處理或
+      <span>
+        <a href="<%= "#{@booking.cancel_key}" %>" target="_blank">
+          取消本次訂位
+        </a>
+      </span>
+      後，再
+      <span>
+        <a href="<%= "#{@booking.res_url}" %>" target="_blank">
+          重新訂位
+        </a>
+      </span>
+      謝謝。
+    </div>
+
+    <div style="float: right;margin-right: 50px;letter-spacing: 1px;font-size: 16px;margin-bottom: 10px">
+      <a href="http://codream.tw" target="_blank">CoDream Team</a>
+    </div>
+
+    <hr style="border: 1; width: 100%;color: rgb(55,55,55)">
+
+    <div style="text-align: center">
+      <a href="https://maps.google.com/maps?q=<%= @booking.restaurant_address %>&hl=zh-TW&ie=UTF8&z=17" target="_blank">
+        <img src="//maps.googleapis.com/maps/api/staticmap?markers=|<%= @booking.restaurant_address %>&zoom=16&size=500x300&sensor=false" alt="map">
+      </a>
+    </div>
+
+    <hr style="border: 1; width: 100%;color: rgb(55,55,55)">
+
+    <div style="font-size: 16px;letter-spacing: 1px;text-align: center">
+      <!--誠摯的謝謝您<br>
+      你的CoDream團隊<br>
+      <div class="clear" style="border-top: 1px solid rgb(224,228,228);margin-bottom: 20px;margin-top: 20px"></div>
+      CoDream團隊堅持人人都應該平等，你我都是VIP，餐廳不需要購買或支付訂吧Dingba的費用。<br>
+      目前訂吧Dingba尚在Beta版本，之後會修正爲更加穩定並無錯誤產生的Stable版本，<br>
+      唯一不變的是-->
+      訂吧 Dingba 永遠免費<br>
+      由 CoDream 團隊提供<br>
+      <a href="https://www.facebook.com/dingba8" target="_blank">Dingba Facebook粉絲頁</a>、
+      <a href="http://blog.codream.tw/tagged/dingba" target="_blank">Dingba 部落格</a>
+      <!--、<a href="" target="_blank">Dingba Google+</a><br>-->
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
+

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DingBa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+body {
+  line-height: 24px;
+}
+div {
+  position: relative;
+}
+.container {
+  width: 940px;
+}
+#logo {
+  width: 180px;
+}
+#logo_word {
+  font-size: 22px;
+  position: absolute;
+  bottom: 40px;
+}
+td {
+  padding: 4px;
+}
+.right {
+  text-align: right;
+}
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div id="res_header" class="header">
+      <!-- TODO: logo網址記得要換 -->
+      <img id="logo" src="/assets/res/logo.png">
+      <span id="logo_word">訂位不打烊，你我都是VIP</span>
+    </div>
+    <div style="border-top: 1px solid #000000"></div>
+    <h2>訂吧通知：您收到新訂位，請提早安排座位喔！</h2>
+    Hello<%= @res_name %>您好<br>
+    您的最新訂位資料如下：
+    <div style="border-top: 1px dotted #cccccc"></div>
+    <table>
+      <tr>
+        <td class="right">訂位名字：</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="right">Mail：</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="right">電話：</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="right">人數：</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="right">時間：</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="right">備註：</td>
+        <td></td>
+      </tr>
+    </table>
+    <div style="border-top: 1px dotted #cccccc"></div>
+    誠摯的謝謝您<br>
+    你的CoDream團隊<br>
+    --<br>
+    CoDream團隊堅持人人都應該平等，你我都是VIP，餐廳不需要購買或支付訂吧Dingba的費用。<br>
+    目前訂吧Dingba尚在Beta版本，之後會修正爲更加穩定並無錯誤產生的Stable版本，唯一不變的是訂吧Dingba將永遠是免費使用的平台。<a href="" target="_blank">Dingba Facebook粉絲頁</a>、<a href="" target="_blank">Dingba 部落格</a>、<a href="" target="_blank">Dingba Google+</a><br>
+    您的的餐廳訂位頁連結：<br>
+    <a href="http://dingba.codream.tw/user/user01" target="_blank">http://dingba.codream.tw/user/user01</a>
+  </div>
+
+</body>
+</html>

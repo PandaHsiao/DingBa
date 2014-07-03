@@ -1,0 +1,64 @@
+
+<div class="span5">
+  <a href= "/">
+    <%= image_tag "common/rae_logo_chef.png", :size => "280", :style => 'display:block;margin:auto;margin-top:100px' %>
+    <%= image_tag "common/slogan.png", :size => "280", :style => 'display:block;margin:auto' %>
+  </a>
+  <a href="/registrations/booker_new" class="base_brown" style="display: block;font-size: 18px;text-align: center;text-decoration: underline;color:blue;letter-spacing: 1px;margin-top: 20px">消費者註冊請點此</a>
+</div>
+<div class="span6">
+  <div style="font-size: 25px;letter-spacing: 1px; margin-top: 50px">餐廳用戶註冊</div>
+  <div style="font-size: 16px;color: #7F1700;letter-spacing: 1px;margin-top: 15px;margin-left: 3px">已有帳號，我要
+    <a href="/sessions/restaurant_new" style="color: blue">登入</a>
+  </div>
+  <hr color="#D6D6D6" size="3" width="100%">
+
+  <%= form_tag res_create_path do %>
+
+      <div style="float: left; font-size: 16px; width: 33%;line-height: 35px;text-align: right;">
+        您的姓名：<br>
+        帳號 ( E-Mail )：<br>
+        您的電話：<br>
+        設定密碼：<br>
+
+        <% if APP_CONFIG['enable_invite_code'] == 'true' %>
+            邀請碼 : <br>
+        <% end %>
+      </div>
+
+      <div style="float: right; font-size: 16px; width: 67%; margin-bottom: 15px;line-height: 35px">
+        <%= text_field_tag :tag_name, params[:tag_name], :required => true %>
+        <%= text_field_tag :tag_email, params[:tag_email], :required => true %>
+        <%= text_field_tag :tag_phone, params[:tag_phone], :required => true %>
+        <%= password_field_tag :tag_password, nil, :required => true, :placeholder => '密碼長度至少要7個字元' %>
+
+        <% if APP_CONFIG['enable_invite_code'] == 'true' %>
+            <%= text_field_tag :tag_invite_code, params[:tag_invite_code], :required => true %>
+        <% end %>
+
+        <label class="checkbox inline" style="font-size: 16px"><%= check_box_tag :tag_i_agree, 1, false, {required: 'required'} %>
+          我同意
+          <a href="/home/clause" target="_blank" class="base_brown" style="margin-left: 2px">訂吧條款</a>
+        </label>
+        <div><%= submit_tag "註冊帳號" , { :class => 'btn btn-primary',:disable_with => 'Processing...' } %></div>
+      </div>
+
+      <table width="100%">&nbsp;</table>
+      <hr color="#D6D6D6" size="3" width="100%">
+
+      <div style="font-size: 14px;letter-spacing: 1px;line-height: 24px">
+        點擊「註冊帳號」的同時，<br>
+        表示您同意接受我們的個人資料提供同意書以及使用條款，<br>
+        也詳讀和完全了解我們的資料使用政策，<br>
+        包括Cookie的使用，詳細資訊及內容請參考
+        <a href="/home/clause" target="_blank" class="base_brown" style="margin-left: 2px">訂吧條款</a>
+      </div>
+
+  <% end %>
+</div>
+
+<script>
+    $('form').submit(function(){
+        return validate(this);
+    });
+</script>

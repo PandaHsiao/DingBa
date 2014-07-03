@@ -1,0 +1,94 @@
+
+<% @books.each do |booking| %>
+
+    <div style="width:100%; border: 1px solid rgb(207,207,207);margin-bottom: 2px">
+    </div>
+    <div style="float:left; width: 40%; height: 50%;text-align: center;">
+      <label style="font-size: 16px;margin-top: 4px">訂位時間： <%= booking.booking_time.strftime("%Y-%m-%d %H:%M")%> </label>
+      <a class="record_pic" href="/r/<%= booking.res_url %>"><img src="/res/<%= booking.restaurant_id %>/images/<%= booking.restaurant_pic %>" alt=""></a>
+    </div>
+    <div style="float: right; width: 60%; height: 50%">
+      <div style="width: 15%; font-size: 16px; text-align: right;float: left; margin-top: 10px; margin-bottom: 5px">
+        餐廳：</br>
+        地址：</br>
+        名字：</br>
+        Mail：</br>
+        電話：</br>
+        人數：</br>
+        出席者：</br>
+        備註：</br>
+        狀態：
+      </div>
+      <div style="width: 85%; font-size: 16px; text-align: left;float: right; margin-top: 10px; margin-bottom: 5px">
+
+        <a href="/r/<%= booking.res_url %>" style="color: blue"><%= booking.restaurant_name %></a></br>
+        <%= booking.restaurant_address %></br>
+        <%= booking.name %></br>
+        <%= booking.email %></br>
+        <%= booking.phone %></br>
+        <%= booking.num_of_people %></br>
+        <%= booking.participants %></br>
+        <%= booking.remark %></br>
+
+        <% if booking.status == '0' %>
+            <label id="<%= booking.id %>" style="font-size: 16px">
+              已訂位( 未用餐 ) <a href="#" name="cancel_booking_btn" data-value="<%= booking.id %>" style="font-size: 16px;color: blue;padding-left: 10px">取消訂位</a>
+            </label>
+        <% elsif booking.status == '1' && booking.feedback.blank? %>
+            <label id="<%= booking.id %>" style="font-size: 16px;color: blue">
+              已訂位( 待評論 )
+            </label>
+        <% elsif booking.status == '1' && !booking.feedback.blank? %>
+            <label id="<%= booking.id %>" style="font-size: 16px;color: blue">
+              已訂位( 已評論 )
+            </label>
+        <% else %>
+            <label id="<%= booking.id %>" style="font-size: 16px;color: red">
+              <% if booking.status == '2' %>
+                  取消訂位( 同伴無法配合 )
+              <% elsif booking.status == '3' %>
+                  取消訂位( 餐廳當天座位不夠 )
+              <% elsif booking.status == '4' %>
+                  取消訂位( 選擇了其他餐廳 )
+              <% elsif booking.status == '5' %>
+                  取消訂位( 餐廳臨時公休 )
+              <% elsif booking.status == '6' %>
+                  取消訂位( 聚餐延期 )
+              <% elsif booking.status == '7' %>
+                  取消訂位( 原因:<%= booking.cancel_note%> )
+              <% end %>
+            </label>
+        <% end %>
+      </div>
+
+      <% if booking.status == '1' %>
+          <hr color="#D6D6D6" size="3" width="100%">
+          <div id="fd_<%= booking.id %>">
+            <div style="width: 15%; font-size: 16px; text-align: right;float: left; margin-top: -10px; margin-bottom: 5px">
+              消費感想：
+            </div>
+            <div name="feedback_div" style="width: 85%; font-size: 16px; text-align: left;float: right; margin-top: -10px; margin-bottom: 5px">
+              <label name="feedback_label" style="color: #1e1e1e">
+                <%= booking.feedback %>
+                <a href="#" name="showEdit" data-value="<%= booking.id %>" style="font-size: 16px;color: #7F1700;padding-left: 10px;margin-left: -9px">點我,輸入感想</a>
+              </label>
+
+              <textarea name="feedback_area" style="display: none"><%= booking.feedback %></textarea>
+
+              <div name="btn_div" style="display: none">
+                <button class="btn btn-primary" name='save_feedback'>確定</button>
+                <button class="btn" name='close_edit'>關閉</button>
+              </div>
+            </div>
+          </div>
+      <% else %>
+          <hr color="#ffffff" size="1" width="100%">
+      <% end %>
+    </div>
+
+    <table style="width: 100%">
+    </table>
+<% end %>
+
+
+

@@ -1,0 +1,115 @@
+
+<div style="font-size: 16px; margin-left: 11px">
+  訂位明細查詢：
+  <input id="report_date_from" type="text" class="datepicker from input-small" value="<%= @from %>">
+  至
+  <input id="report_date_to" type="text" class="datepicker to input-small" value="<%= @to %>">
+  <input id="export_excel" class="btn btn-primary" type="button" value="匯出EXCEL報表" style="margin-left: 30px;margin-top: -5px">
+</div>
+
+<div id="books_report" style="margin-left: -20px; margin-top: 15px; width: 780px">
+
+  <div style="font-size: 14px; color: gray; margin-top: 10px;margin-left: 47px">查詢時間為：
+    <span style="color: gray; font-size: 14px; margin-left: 8px;margin-right: 8px"><%= @from %></span>
+    至
+    <span style="color: gray; font-size: 14px; margin-left: 8px"><%= @to %></span>
+    (預設值為最近兩周，且點選日期後會馬上查詢)
+  </div>
+
+  <div style="font-size: 16px; margin-left: 8px; margin-bottom: 15px; margin-top: 15px;">
+    已訂位( 未用餐 ) ： <span style="margin-left: 8px; color: blue">共 <span style="color: red"><%= @total_upcoming_people %></span> 人 </span>
+  </div>
+
+  <table class="table table-bordered">
+    <colgroup>
+      <col style="width: 5%">
+      <col style="width: 20%">
+      <col style="width: 6%">
+      <col style="width: 11%">
+      <col style="width: 15%">
+      <col style="width: 26%">
+      <!--<col style="width: 8%">-->
+      <col style="width: 17%">
+    </colgroup>
+
+    <tr>
+      <td class="table_header" style="text-align: center">序號</td>
+      <td class="table_header" style="text-align: center">日期</td>
+      <td class="table_header" style="text-align: center">人數</td>
+      <td class="table_header" style="text-align: center">訂位者</br>姓名</td>
+      <td class="table_header" style="text-align: center">訂位者</br>電話</td>
+      <td class="table_header" style="text-align: center">訂位者EMAIL</td>
+      <!--<td class="table_header" style="text-align: center">備註</td>-->
+      <td class="table_header" style="text-align: center">訂位狀態</td>
+    </tr>
+
+    <% @books.each_with_index do |b, i| %>
+        <% if i % 2 == 0 %>
+            <tr style="background-color: rgb(242,242,242)">
+        <% else %>
+            <tr>
+        <% end %>
+        <td class="table_content"><%= i + 1 %></td>
+        <td class="table_content" style="text-align: center"><%= b.booking_time.strftime("%Y-%m-%d %H:%M") %></td>
+        <td class="table_content" style="text-align: right;padding-right: 10px"><%= b.num_of_people %></td>
+        <td class="table_content" style="text-align: center"><%= b.name %></td>
+        <td class="table_content" style="text-align: center"><%= b.phone %></td>
+        <td class="table_content" style="text-align: center"><%= b.email %></td>
+        <!--<td class="table_content"><%# b.remark %></td>-->
+
+        <td>
+          <% if b.status == '0' %>
+              <span style="color: blue">已訂位( 未用餐 )</span>
+          <% elsif b.status == '1' && b.feedback.blank?%>
+              已訂位( 待評論 )
+          <% elsif b.status == '1' && !b.feedback.blank?%>
+              已訂位( 已評論 )
+          <% elsif b.status == '2'%>
+              <span style="color: red">取消訂位!</span></br>同伴無法配合
+          <% elsif b.status == '3'%>
+              <span style="color: red">取消訂位!</span></br>餐廳當天座位不夠
+          <% elsif b.status == '4'%>
+              <span style="color: red">取消訂位!</span></br>選擇了其他餐廳
+          <% elsif b.status == '5'%>
+              <span style="color: red">取消訂位!</span></br>餐廳臨時公休
+          <% elsif b.status == '6'%>
+              <span style="color: red">取消訂位!</span></br>聚餐延期
+          <% elsif b.status == '7'%>
+              <span style="color: red">取消訂位!</span></br><%= b.cancel_note %>
+          <% end %>
+        </td>
+        </tr>
+    <% end %>
+  </table>
+</div>
+
+<script>
+    $(function(){
+        $('#export_excel').click(function(e){
+            window.open('data:application/vnd.ms-excel,' + encodeURIComponent( $('#books_report').html()));
+            e.preventDefault();
+        });
+
+        $(".from").datepicker({
+            dateFormat: 'yy-mm-dd',
+            //defaultDate: "+1w",
+            changeMonth: true,
+            showOn: 'both',
+            buttonText: '<i class="icon-calendar"></i>',
+            onClose: function( selectedDate ) {
+                $(".to").datepicker( "option", "minDate", selectedDate );
+            }
+        });
+
+        $(".to").datepicker({
+            dateFormat: 'yy-mm-dd',
+            //defaultDate: "+1w",
+            changeMonth: true,
+            showOn: 'both',
+            buttonText: '<i class="icon-calendar"></i>',
+            onClose: function( selectedDate ) {
+                $(".from").datepicker( "option", "maxDate", selectedDate );
+            }
+        });
+    })
+</script>

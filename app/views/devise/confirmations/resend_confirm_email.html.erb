@@ -1,0 +1,18 @@
+
+<div style="width: 500px;text-align: center;letter-spacing: 2px">
+  <h4>重新寄發註冊確認信</h4>
+
+  <%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
+      <%= devise_error_messages! %>
+
+      <div style="font-size: 16px; margin-top: 20px;margin-bottom: 10px;letter-spacing: 1px">
+        請輸入您的帳號 ( E-Mail )
+      </div>
+
+      <div>
+        <%= f.email_field :email, :autofocus => true %>
+      </div>
+
+      <div><%= f.submit "確認" , { :class => 'btn btn-primary' } %></div>
+  <% end %>
+</div>
